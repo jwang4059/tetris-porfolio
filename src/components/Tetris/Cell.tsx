@@ -1,7 +1,7 @@
 import React from "react";
 
 interface CellProps {
-	type: string;
+	type: number;
 }
 
 const Cell = ({ type }: CellProps) => {
