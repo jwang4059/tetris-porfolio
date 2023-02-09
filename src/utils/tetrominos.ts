@@ -1,13 +1,13 @@
-export type TetraminoType = {
+export type TetrominoType = {
 	shape: string[][];
 	color: string;
 };
 
 export type TetraminosType = {
-	[key: string]: TetraminoType;
+	[key: string]: TetrominoType;
 };
 
-export const TETRAMINOS: TetraminosType = {
+export const TETROMINOS: TetraminosType = {
 	"0": {
 		shape: [["0"]],
 		color: "",
@@ -71,8 +71,8 @@ export const TETRAMINOS: TetraminosType = {
 };
 
 export const generateRandTetramino = () => {
-	const tetraminos = ["I", "J", "L", "O", "S", "T", "Z"];
-	const randTetramino =
-		tetraminos[Math.floor(Math.random() * tetraminos.length)];
-	return TETRAMINOS[randTetramino];
+	const tetrominos = ["I", "J", "L", "O", "S", "T", "Z"];
+	const randTetromino =
+		tetrominos[Math.floor(Math.random() * tetrominos.length)];
+	return TETROMINOS[randTetromino];
 };

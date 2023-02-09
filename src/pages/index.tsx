@@ -1,5 +1,5 @@
 import Head from "next/head";
-import Tetris from "@/components/Tetris/Tetris";
+import Tetris from "@/components/Tetris/Tetris/Tetris";
 
 export default function Home() {
 	return (
