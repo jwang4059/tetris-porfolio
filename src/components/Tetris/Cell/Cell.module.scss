@@ -10,29 +10,29 @@
 }
 
 .I {
-	@include tetromino;
+	@include tetromino($color: cyan);
 }
 
 .J {
-	@include tetromino;
+	@include tetromino($color: blue);
 }
 
 .L {
-	@include tetromino($color: yellow);
+	@include tetromino($color: orange);
 }
 
 .O {
-	@include tetromino;
+	@include tetromino($color: yellow);
 }
 
 .S {
-	@include tetromino;
+	@include tetromino($color: green);
 }
 
 .T {
-	@include tetromino;
+	@include tetromino($color: purple);
 }
 
 .Z {
-	@include tetromino;
+	@include tetromino($color: red);
 }

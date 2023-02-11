@@ -1,5 +1,6 @@
-import { useState } from "react";
-import { generateRandTetramino } from "@/utils/tetrominos";
+import { useCallback, useState } from "react";
+import { TETROMINOS, generateRandTetramino } from "@/utils/tetrominos";
+import { STAGE_WIDTH } from "@/utils/gameHelpers";
 
 export type PlayerType = {
 	pos: { x: number; y: number };
@@ -10,9 +11,33 @@ export type PlayerType = {
 export const usePlayer = () => {
 	const [player, setPlayer] = useState<PlayerType>({
 		pos: { x: 0, y: 0 },
-		tetromino: generateRandTetramino().shape,
+		tetromino: TETROMINOS[0].shape,
 		collided: false,
 	});
 
-	return [player] as const;
+	const updatePlayerPos = ({
+		x,
+		y,
+		collided,
+	}: {
+		x: number;
+		y: number;
+		collided: boolean;
+	}) => {
+		setPlayer({
+			...player,
+			pos: { x: (player.pos.x += x), y: (player.pos.y += y) },
+			collided,
+		});
+	};
+
+	const resetplayer = useCallback(() => {
+		setPlayer({
+			pos: { x: STAGE_WIDTH / 2 - 2, y: 0 },
+			tetromino: generateRandTetramino().shape,
+			collided: false,
+		});
+	}, []);
+
+	return [player, updatePlayerPos, resetplayer] as const;
 };
