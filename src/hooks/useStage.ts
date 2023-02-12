@@ -27,11 +27,16 @@ export const useStage = (player: PlayerType, resetPlayer: () => void) => {
 				});
 			});
 
+			// Then check if we collided
+			if (player.collided) {
+				resetPlayer();
+			}
+
 			return newStage;
 		};
 
 		setStage(updateStage(stage));
-	}, [player, stage]);
+	}, [player, resetPlayer, stage]);
 
 	return [stage, setStage] as const;
 };
