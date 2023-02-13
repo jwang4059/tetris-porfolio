@@ -1,5 +1,4 @@
 import React from "react";
-import { TETROMINOS } from "@/utils/tetrominos";
 import styles from "./Cell.module.scss";
 
 interface CellProps {

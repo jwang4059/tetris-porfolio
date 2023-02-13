@@ -2,11 +2,11 @@ import React from "react";
 import styles from "./Display.module.scss";
 
 interface DisplayProps {
-	gameOver: boolean;
 	text: string;
+	gameOver: boolean;
 }
 
-const Display = ({ gameOver, text }: DisplayProps) => {
+const Display = ({ text, gameOver }: DisplayProps) => {
 	const status = gameOver ? "gameover" : "ongoing";
 	return <div className={styles[status]}>{text}</div>;
 };

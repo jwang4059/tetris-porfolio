@@ -1,17 +1,13 @@
-import { useCallback, useState } from "react";
+import { useState, useCallback } from "react";
 import { TETROMINOS, generateRandTetramino } from "@/utils/tetrominos";
-import { CellType, checkCollision, STAGE_WIDTH } from "@/utils/gameHelpers";
-
-export type PlayerType = {
-	pos: { x: number; y: number };
-	tetromino: string[][];
-	collided: boolean;
-};
+import { checkCollision } from "@/utils/gameHelpers";
+import { STAGE_WIDTH } from "@/utils/constants";
+import { PlayerType, StageType } from "@/utils/types";
 
 export const usePlayer = () => {
 	const [player, setPlayer] = useState<PlayerType>({
 		pos: { x: 0, y: 0 },
-		tetromino: TETROMINOS[0].shape,
+		tetromino: TETROMINOS[0],
 		collided: false,
 	});
 
@@ -25,7 +21,7 @@ export const usePlayer = () => {
 		return rotatedTetro.reverse();
 	};
 
-	const playerRotate = (stage: CellType[][], dir: number) => {
+	const playerRotate = (stage: StageType, dir: number) => {
 		// Use structuredClone for deep cloning
 		const clonedPlayer: PlayerType = JSON.parse(JSON.stringify(player));
 		clonedPlayer.tetromino = rotate(clonedPlayer.tetromino, dir);
@@ -64,7 +60,7 @@ export const usePlayer = () => {
 	const resetplayer = useCallback(() => {
 		setPlayer({
 			pos: { x: STAGE_WIDTH / 2 - 2, y: 0 },
-			tetromino: generateRandTetramino().shape,
+			tetromino: generateRandTetramino(),
 			collided: false,
 		});
 	}, []);

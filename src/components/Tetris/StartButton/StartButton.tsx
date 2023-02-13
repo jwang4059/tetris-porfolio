@@ -2,12 +2,12 @@ import React from "react";
 import styles from "./StartButton.module.scss";
 
 interface StartButtonProps {
-	callback: () => void;
+	onClick: () => void;
 }
 
-const StartButton = ({ callback }: StartButtonProps) => {
+const StartButton = ({ onClick }: StartButtonProps) => {
 	return (
-		<div className={styles.startbutton} onClick={callback}>
+		<div className={styles.startbutton} onClick={onClick}>
 			Start Game
 		</div>
 	);

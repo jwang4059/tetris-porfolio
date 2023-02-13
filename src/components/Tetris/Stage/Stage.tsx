@@ -1,10 +1,10 @@
 import React from "react";
 import Cell from "../Cell/Cell";
-import { CellType } from "@/utils/gameHelpers";
+import { StageType } from "@/utils/types";
 import styles from "./Stage.module.scss";
 
 interface StageProps {
-	stage: CellType[][];
+	stage: StageType;
 }
 
 const Stage = ({ stage }: StageProps) => {

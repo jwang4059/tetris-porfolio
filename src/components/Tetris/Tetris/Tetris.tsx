@@ -102,7 +102,7 @@ const Tetris = () => {
 							<Display text={`Level: ${level}`} gameOver={gameOver} />
 						</div>
 					)}
-					<StartButton callback={startGame} />
+					<StartButton onClick={startGame} />
 				</aside>
 			</div>
 		</div>
