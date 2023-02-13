@@ -10,4 +10,4 @@ const Cell = ({ type }: CellProps) => {
 	return <div className={styles[type]} />;
 };
 
-export default Cell;
+export default React.memo(Cell);
