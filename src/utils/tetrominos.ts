@@ -1,4 +1,4 @@
-import { TetraminosType } from "./types";
+import { TetraminosType, TetrominoType } from "./types";
 
 export const TETROMINOS: TetraminosType = {
 	"0": [["0"]],
@@ -40,6 +40,21 @@ export const TETROMINOS: TetraminosType = {
 		["0", "Z", "Z"],
 		["0", "0", "0"],
 	],
+};
+
+export const rotateTetromino = (matrix: TetrominoType, dir: number) => {
+	// Transpose Matrix
+	const transposedMatrix = matrix[0].map((_, colIndex) =>
+		matrix.map((row) => row[colIndex])
+	);
+
+	// Reflect Matrix
+	const reflectedMatrix =
+		dir > 0
+			? transposedMatrix.map((row) => row.reverse())
+			: transposedMatrix.reverse();
+
+	return reflectedMatrix;
 };
 
 export const generateRandTetramino = () => {

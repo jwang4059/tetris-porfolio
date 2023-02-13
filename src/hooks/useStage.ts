@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
-import { PlayerType } from "./usePlayer";
-import { CellType, createStage } from "@/utils/gameHelpers";
+import { createStage } from "@/utils/gameHelpers";
+import { StageType, PlayerType } from "@/utils/types";
 
 export const useStage = (player: PlayerType, resetPlayer: () => void) => {
 	const [stage, setStage] = useState(createStage());
@@ -10,7 +10,7 @@ export const useStage = (player: PlayerType, resetPlayer: () => void) => {
 	useEffect(() => {
 		setRowsCleared(0);
 
-		const sweepRows = (newStage: CellType[][]) =>
+		const sweepRows = (newStage: StageType) =>
 			newStage.reduce((ack, row) => {
 				if (row.findIndex((cell) => cell.value === "0") === -1) {
 					setRowsCleared((prev) => prev + 1);
@@ -21,9 +21,9 @@ export const useStage = (player: PlayerType, resetPlayer: () => void) => {
 				}
 				ack.push(row);
 				return ack;
-			}, [] as CellType[][]);
+			}, [] as StageType);
 
-		const updateStage = (prevStage: CellType[][]) => {
+		const updateStage = (prevStage: StageType) => {
 			//First flush the stage
 			const newStage = prevStage.map((row) =>
 				row.map((cell) =>
