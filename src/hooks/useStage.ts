@@ -4,9 +4,25 @@ import { CellType, createStage } from "@/utils/gameHelpers";
 
 export const useStage = (player: PlayerType, resetPlayer: () => void) => {
 	const [stage, setStage] = useState(createStage());
+	const [rowsCleared, setRowsCleared] = useState(0);
 
 	// Use for loop to improve performance
 	useEffect(() => {
+		setRowsCleared(0);
+
+		const sweepRows = (newStage: CellType[][]) =>
+			newStage.reduce((ack, row) => {
+				if (row.findIndex((cell) => cell.value === "0") === -1) {
+					setRowsCleared((prev) => prev + 1);
+					ack.unshift(
+						new Array(newStage[0].length).fill({ value: "0", status: "clear" })
+					);
+					return ack;
+				}
+				ack.push(row);
+				return ack;
+			}, [] as CellType[][]);
+
 		const updateStage = (prevStage: CellType[][]) => {
 			//First flush the stage
 			const newStage = prevStage.map((row) =>
@@ -30,6 +46,7 @@ export const useStage = (player: PlayerType, resetPlayer: () => void) => {
 			// Then check if we collided
 			if (player.collided) {
 				resetPlayer();
+				return sweepRows(newStage);
 			}
 
 			return newStage;
@@ -38,5 +55,5 @@ export const useStage = (player: PlayerType, resetPlayer: () => void) => {
 		setStage(updateStage(stage));
 	}, [player, resetPlayer, stage]);
 
-	return [stage, setStage] as const;
+	return [stage, setStage, rowsCleared] as const;
 };
