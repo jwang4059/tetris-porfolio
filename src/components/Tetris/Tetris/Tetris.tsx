@@ -19,7 +19,7 @@ const Tetris = () => {
 
 	const movePlayer = (dir: number) => {
 		if (!checkCollision(player, stage, { x: dir, y: 0 }))
-			updatePlayerPos({ x: dir, y: 0, collided: false });
+			updatePlayerPos({ move: { x: dir, y: 0 }, collided: false });
 	};
 
 	const startGame = () => {
@@ -40,40 +40,40 @@ const Tetris = () => {
 			setDropTime(1000 / (level + 1) + 200);
 		}
 		if (!checkCollision(player, stage, { x: 0, y: 1 }))
-			updatePlayerPos({ x: 0, y: 1, collided: false });
+			updatePlayerPos({ move: { x: 0, y: 1 }, collided: false });
 		else {
 			if (player.pos.y < 1) {
 				console.log("gameover");
 				setGameOver(true);
 				setDropTime(null);
 			}
-			updatePlayerPos({ x: 0, y: 0, collided: true });
-		}
-	};
-
-	const keyUp = ({ key }: React.KeyboardEvent<HTMLDivElement>) => {
-		if (!gameOver) {
-			if (key === "ArrowDown") {
-				setDropTime(1000 / (level + 1) + 200);
-			}
+			updatePlayerPos({ move: { x: 0, y: 0 }, collided: true });
 		}
 	};
 
 	const dropPlayer = () => {
-		setDropTime(null);
 		drop();
 	};
 
 	const move = ({ key }: React.KeyboardEvent<HTMLDivElement>) => {
 		if (!gameOver) {
-			if (key === "ArrowLeft") {
-				movePlayer(-1);
-			} else if (key === "ArrowRight") {
-				movePlayer(1);
-			} else if (key === "ArrowDown") {
-				dropPlayer();
-			} else if (key === "ArrowUp") {
-				playerRotate(stage, 1);
+			switch (key) {
+				case "ArrowLeft":
+					movePlayer(-1);
+					break;
+				case "ArrowRight":
+					movePlayer(1);
+					break;
+				case "ArrowDown":
+					dropPlayer();
+					break;
+				case "ArrowUp":
+				case "x":
+					playerRotate(stage, 1);
+					break;
+				case "z":
+					playerRotate(stage, -1);
+					break;
 			}
 		}
 	};
@@ -88,7 +88,6 @@ const Tetris = () => {
 			role="button"
 			tabIndex={0}
 			onKeyDown={(e) => move(e)}
-			onKeyUp={keyUp}
 		>
 			<div className={styles.tetris}>
 				<Stage stage={stage} />

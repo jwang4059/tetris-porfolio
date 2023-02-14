@@ -31,17 +31,17 @@ export const useStage = (player: PlayerType, resetPlayer: () => void) => {
 				)
 			);
 
-			// Then draw tetromino
-			player.tetromino.forEach((row, y) => {
-				row.forEach((value, x) => {
-					if (value !== "0") {
-						newStage[y + player.pos.y][x + player.pos.x] = {
-							value,
+			// Merge current tetromino into board
+			for (let y = 0; y < player.tetromino.length; y++) {
+				for (let x = 0; x < player.tetromino[y].length; x++) {
+					if (player.tetromino[y][x] !== "0") {
+						newStage[player.pos.y + y][player.pos.x + x] = {
+							value: player.tetromino[y][x],
 							status: `${player.collided ? "merged" : "clear"}`,
 						};
 					}
-				});
-			});
+				}
+			}
 
 			// Then check if we collided
 			if (player.collided) {

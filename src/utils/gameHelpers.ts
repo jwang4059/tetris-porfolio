@@ -1,5 +1,5 @@
 import { STAGE_HEIGHT, STAGE_WIDTH } from "./constants";
-import { PlayerType, StageType } from "./types";
+import { CoordinateType, PlayerType, StageType } from "./types";
 
 export const createStage: () => StageType = () => {
 	return new Array(STAGE_HEIGHT).fill(
@@ -10,7 +10,7 @@ export const createStage: () => StageType = () => {
 export const checkCollision = (
 	player: PlayerType,
 	stage: StageType,
-	{ x: moveX, y: moveY }: { x: number; y: number }
+	move: CoordinateType
 ) => {
 	for (let row = 0; row < player.tetromino.length; row += 1) {
 		for (let col = 0; col < player.tetromino[row].length; col += 1) {
@@ -19,11 +19,11 @@ export const checkCollision = (
 				if (
 					// 2. Check that our move is inside the game area height (y)
 					// We shouldn't go through the bottom of the play area
-					!stage[row + player.pos.y + moveY] ||
+					!stage[row + player.pos.y + move.y] ||
 					// 3. Check that our move is inside the game areas width (x)
-					!stage[row + player.pos.y + moveY][col + player.pos.x + moveX] ||
+					!stage[row + player.pos.y + move.y][col + player.pos.x + move.x] ||
 					// 4. Check that the cell we're moving to isn't set to clear
-					stage[row + player.pos.y + moveY][col + player.pos.x + moveX]
+					stage[row + player.pos.y + move.y][col + player.pos.x + move.x]
 						.status !== "clear"
 				) {
 					return true;

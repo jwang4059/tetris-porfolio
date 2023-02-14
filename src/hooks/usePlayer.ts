@@ -6,7 +6,7 @@ import {
 } from "@/utils/tetrominos";
 import { checkCollision } from "@/utils/gameHelpers";
 import { STAGE_WIDTH } from "@/utils/constants";
-import { PlayerType, StageType } from "@/utils/types";
+import { CoordinateType, PlayerType, StageType } from "@/utils/types";
 
 export const usePlayer = () => {
 	const [player, setPlayer] = useState<PlayerType>({
@@ -15,18 +15,17 @@ export const usePlayer = () => {
 		collided: false,
 	});
 
+	// Remove collided and check collision logic before updating
 	const updatePlayerPos = ({
-		x,
-		y,
+		move,
 		collided,
 	}: {
-		x: number;
-		y: number;
+		move: CoordinateType;
 		collided: boolean;
 	}) => {
 		setPlayer({
 			...player,
-			pos: { x: (player.pos.x += x), y: (player.pos.y += y) },
+			pos: { x: (player.pos.x += move.x), y: (player.pos.y += move.y) },
 			collided,
 		});
 	};
