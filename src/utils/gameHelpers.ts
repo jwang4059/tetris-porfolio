@@ -1,35 +1,64 @@
 import { STAGE_HEIGHT, STAGE_WIDTH } from "./constants";
-import { PlayerType, StageType } from "./types";
+import { CoordinateType, PlayerType, StageType } from "./types";
 
 export const createStage: () => StageType = () => {
 	return new Array(STAGE_HEIGHT).fill(new Array(STAGE_WIDTH).fill("0"));
 };
 
 export const mergeStage = (stage: StageType, player: PlayerType) => {
-	const result = stage.map((row) => row.slice());
+	const newStage = stage.map((row) => row.slice());
 
 	// Merge current tetromino into board
 	for (let y = 0; y < player.tetromino.length; y++) {
 		for (let x = 0; x < player.tetromino[y].length; x++) {
 			if (player.tetromino[y][x] !== "0") {
-				result[y + player.pos.y][x + player.pos.x] = player.tetromino[y][x];
+				newStage[y + player.pos.y][x + player.pos.x] = player.tetromino[y][x];
 			}
 		}
 	}
 
-	return result;
+	return newStage;
 };
 
-export const checkCollision = (player: PlayerType, stage: StageType) => {
+export const sweepStage = (stage: StageType) => {
+	const newStage = stage.map((row) => row.slice());
+
+	let rowCount = 0;
+	outer: for (let y = newStage.length - 1; y > 0; y--) {
+		for (let x = 0; x < newStage[y].length; x++) {
+			if (newStage[y][x] === "0") {
+				continue outer;
+			}
+		}
+
+		const row = newStage.splice(y, 1)[0].fill("0");
+		newStage.unshift(row);
+		y++;
+		rowCount++;
+	}
+
+	return { newStage, rowCount };
+};
+
+export const mergeAndSweepStage = (stage: StageType, player: PlayerType) => {
+	const mergedStage = mergeStage(stage, player);
+	return sweepStage(mergedStage);
+};
+
+export const checkCollision = (
+	stage: StageType,
+	player: PlayerType,
+	move: CoordinateType
+) => {
 	const t = player.tetromino;
 	const o = player.pos;
 	for (let y = 0; y < t.length; y++) {
 		for (let x = 0; x < t[y].length; x++) {
 			if (
 				t[y][x] !== "0" &&
-				stage[y + o.y] &&
-				stage[y + o.y][x + o.x] &&
-				stage[y + o.y][x + o.x] !== "0"
+				(!stage[y + o.y + move.y] ||
+					!stage[y + o.y + move.y][x + o.x + move.x] ||
+					stage[y + o.y + move.y][x + o.x + move.x] !== "0")
 			) {
 				return true;
 			}

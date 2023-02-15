@@ -1,81 +1,80 @@
 import _ from "lodash";
 import React, { useState, useEffect } from "react";
+import { useInterval, usePlayer } from "@/hooks/index";
 import Display from "../Display/Display";
 import Stage from "../Stage/Stage";
 import StartButton from "../StartButton/StartButton";
-import { usePlayer } from "@/hooks/usePlayer";
-import { useStage } from "@/hooks/useStage";
-import { createStage, mergeStage, checkCollision } from "@/utils/gameHelpers";
+import {
+	checkCollision,
+	createStage,
+	mergeStage,
+	mergeAndSweepStage,
+} from "@/utils/gameHelpers";
+import { linePoints } from "@/utils/constants";
+import { StageType } from "@/utils/types";
 import styles from "./Tetris.module.scss";
-import { useInterval } from "@/hooks/useInterval";
-import { useGameStatus } from "@/hooks/useGameStatus";
 
 const Tetris = () => {
-	// const [dropTime, setDropTime] = useState<number | null>(null);
-	// const [gameOver, setGameOver] = useState(false);
+	const [dropTime, setDropTime] = useState<number | null>(null);
+	const [gameOver, setGameOver] = useState<boolean>(false);
+	const [gameStatus, setGameStatus] = useState<{
+		score: number;
+		rows: number;
+		level: number;
+	}>({ score: 0, rows: 0, level: 1 });
+	const [stage, setStage] = useState<StageType>(createStage());
+	const [stageView, setStageView] = useState<StageType | null>(null);
 	const [player, updatePlayerPos, resetPlayer, playerRotate] = usePlayer();
-	const [stage, setStage] = useStage(player, resetPlayer);
-	// const [score, setScore, rows, setRows, level, setLevel] =
-	// 	useGameStatus(rowsCleared);
 
-	// useInterval(() => {
-	// 	drop();
-	// }, dropTime);
-
-	/**
-	 * Add UseEffect here
-	 * UseEffect should update stage every time there is a move (aka left,right,drop)
-	 * Should update game state
-	 * Dependency on player; should not update when stage updates
-	 */
+	useInterval(() => {
+		dropPlayer();
+	}, dropTime);
 
 	useEffect(() => {
-		const newStage = mergeStage(stage, player);
-		if (!_.isEqual(stage, newStage)) setStage(newStage);
-	}, [setStage, stage, player]);
+		const newStageView = mergeStage(stage, player);
+		if (!_.isEqual(stageView, newStageView)) setStageView(newStageView);
+	}, [setStageView, stageView, stage, player]);
 
-	/**
-	 * Other notes:
-	 * Detect collision before move
-	 * If move is valid, check if row needs to be cleared
-	 * Check if possible to change sell into one value
-	 * Combine move into one function instead of separate drop and left/right
-	 * Level should be determined by rows cleared (score separate)
-	 * Remove collided concept if possible
-	 */
-
-	/**
-	 * Start game should
-	 * Gameover false
-	 * Create stage
-	 * Create score
-	 * Create player
-	 * Start time
-	 */
-
-	const startGame = () => {
+	const handleStart = () => {
+		setGameOver(false);
+		setGameStatus({ score: 0, rows: 0, level: 1 });
 		setStage(createStage());
 		resetPlayer();
+		setDropTime(1000);
 	};
 
-	const movePlayer = (dir: number) => {
-		updatePlayerPos({ move: { x: dir, y: 0 }, collided: false });
+	const movePlayer = (offset: number) => {
+		if (!checkCollision(stage, player, { x: offset, y: 0 })) {
+			updatePlayerPos({ x: offset, y: 0 });
+		}
 	};
 
 	const dropPlayer = () => {
-		updatePlayerPos({ move: { x: 0, y: 1 }, collided: false });
-		// if (checkCollision(player, stage)) {
-		// 	updatePlayerPos({ move: { x: 0, y: -1 }, collided: true });
-		// 	// merge(arena, player);
-		// 	// playerReset();
-		// 	// arenaSweep();
-		// 	// updateScore();
-		// }
-		// dropCounter = 0;
+		if (!checkCollision(stage, player, { x: 0, y: 1 })) {
+			updatePlayerPos({ x: 0, y: 1 });
+		} else {
+			if (player.pos.y < 1) {
+				setGameOver(true);
+				console.log("gameover");
+			} else {
+				const result = mergeAndSweepStage(stage, player);
+				setGameStatus({
+					score:
+						gameStatus.score +
+						(result.rowCount >= 1
+							? linePoints[result.rowCount - 1] * gameStatus.level
+							: 0),
+					rows: gameStatus.rows + result.rowCount,
+					level: Math.floor((gameStatus.rows + result.rowCount) / 10) + 1,
+				});
+				setStage(result.newStage);
+				resetPlayer();
+			}
+		}
 	};
 
 	const handleKeyPress = ({ key }: React.KeyboardEvent<HTMLDivElement>) => {
-		if (true) {
+		if (!gameOver) {
 			switch (key) {
 				case "ArrowLeft":
 					movePlayer(-1);
@@ -93,6 +92,9 @@ const Tetris = () => {
 				case "z":
 					playerRotate(stage, -1);
 					break;
+				case "p": // Needs work
+					setDropTime(null);
+					break;
 			}
 		}
 	};
@@ -105,18 +107,24 @@ const Tetris = () => {
 			onKeyDown={(e) => handleKeyPress(e)}
 		>
 			<div className={styles.tetris}>
-				<Stage stage={stage} />
+				<Stage stage={stageView} />
 				<aside>
-					{/* {gameOver ? (
+					{gameOver ? (
 						<Display text={"Game Over"} gameOver={gameOver} />
 					) : (
 						<div>
-							<Display text={`Score: ${score}`} gameOver={gameOver} />
-							<Display text={`Rows: ${rows}`} gameOver={gameOver} />
-							<Display text={`Level: ${level}`} gameOver={gameOver} />
+							<Display
+								text={`Score: ${gameStatus.score}`}
+								gameOver={gameOver}
+							/>
+							<Display text={`Rows: ${gameStatus.rows}`} gameOver={gameOver} />
+							<Display
+								text={`Level: ${gameStatus.level}`}
+								gameOver={gameOver}
+							/>
 						</div>
-					)} */}
-					<StartButton onClick={startGame} />
+					)}
+					<StartButton onClick={handleStart} />
 				</aside>
 			</div>
 		</div>

@@ -1,4 +1,4 @@
-import { useState, useCallback } from "react";
+import { useState } from "react";
 import {
 	TETROMINOS,
 	rotateTetromino,
@@ -12,31 +12,21 @@ export const usePlayer = () => {
 	const [player, setPlayer] = useState<PlayerType>({
 		pos: { x: 0, y: 0 },
 		tetromino: TETROMINOS[0],
-		collided: false,
 	});
 
-	// Remove collided and check collision logic before updating
-	const updatePlayerPos = ({
-		move,
-		collided,
-	}: {
-		move: CoordinateType;
-		collided: boolean;
-	}) => {
+	const updatePlayerPos = (move: CoordinateType) => {
 		setPlayer({
 			...player,
 			pos: { x: (player.pos.x += move.x), y: (player.pos.y += move.y) },
-			collided,
 		});
 	};
 
-	const resetplayer = useCallback(() => {
+	const resetplayer = () => {
 		setPlayer({
 			pos: { x: STAGE_WIDTH / 2 - 2, y: 0 },
 			tetromino: generateRandTetramino(),
-			collided: false,
 		});
-	}, []);
+	};
 
 	const playerRotate = (stage: StageType, dir: number) => {
 		// Use structuredClone for deep cloning
@@ -45,7 +35,7 @@ export const usePlayer = () => {
 
 		const pos = clonedPlayer.pos.x;
 		let offset = 1;
-		while (checkCollision(clonedPlayer, stage)) {
+		while (checkCollision(stage, clonedPlayer, { x: 0, y: 0 })) {
 			clonedPlayer.pos.x += offset;
 			offset = -(offset + (offset > 0 ? 1 : -1));
 			if (offset > clonedPlayer.tetromino[0].length) {
