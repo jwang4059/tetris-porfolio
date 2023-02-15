@@ -12,8 +12,8 @@ export const checkCollision = (
 	stage: StageType,
 	move: CoordinateType
 ) => {
-	for (let row = 0; row < player.tetromino.length; row += 1) {
-		for (let col = 0; col < player.tetromino[row].length; col += 1) {
+	for (let row = 0; row < player.tetromino.length; row++) {
+		for (let col = 0; col < player.tetromino[row].length; col++) {
 			// 1. Check that we're on an actual Tetromino cell
 			if (player.tetromino[row][col] !== "0") {
 				if (
