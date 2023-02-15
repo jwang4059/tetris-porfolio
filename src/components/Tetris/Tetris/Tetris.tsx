@@ -20,7 +20,8 @@ const Tetris = () => {
 	/**
 	 * Add UseEffect here
 	 * UseEffect should update stage every time there is a move (aka left,right,drop)
-	 * Dependency on player
+	 * Should update game state
+	 * Dependency on player; should not update when stage updates
 	 */
 
 	/**
@@ -38,6 +39,14 @@ const Tetris = () => {
 			updatePlayerPos({ move: { x: dir, y: 0 }, collided: false });
 	};
 
+	/**
+	 * Start game should
+	 * Gameover false
+	 * Create stage
+	 * Create score
+	 * Create player
+	 * Start time
+	 */
 	const startGame = () => {
 		setStage(createStage());
 		setDropTime(1000);
