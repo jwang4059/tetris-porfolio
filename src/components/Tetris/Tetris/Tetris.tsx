@@ -1,21 +1,26 @@
-import React, { useState } from "react";
+import _ from "lodash";
+import React, { useState, useEffect } from "react";
 import Display from "../Display/Display";
 import Stage from "../Stage/Stage";
 import StartButton from "../StartButton/StartButton";
 import { usePlayer } from "@/hooks/usePlayer";
 import { useStage } from "@/hooks/useStage";
-import { createStage, checkCollision } from "@/utils/gameHelpers";
+import { createStage, mergeStage, checkCollision } from "@/utils/gameHelpers";
 import styles from "./Tetris.module.scss";
 import { useInterval } from "@/hooks/useInterval";
 import { useGameStatus } from "@/hooks/useGameStatus";
 
 const Tetris = () => {
-	const [dropTime, setDropTime] = useState<number | null>(null);
-	const [gameOver, setGameOver] = useState(false);
+	// const [dropTime, setDropTime] = useState<number | null>(null);
+	// const [gameOver, setGameOver] = useState(false);
 	const [player, updatePlayerPos, resetPlayer, playerRotate] = usePlayer();
-	const [stage, setStage, rowsCleared] = useStage(player, resetPlayer);
-	const [score, setScore, rows, setRows, level, setLevel] =
-		useGameStatus(rowsCleared);
+	const [stage, setStage] = useStage(player, resetPlayer);
+	// const [score, setScore, rows, setRows, level, setLevel] =
+	// 	useGameStatus(rowsCleared);
+
+	// useInterval(() => {
+	// 	drop();
+	// }, dropTime);
 
 	/**
 	 * Add UseEffect here
@@ -23,6 +28,11 @@ const Tetris = () => {
 	 * Should update game state
 	 * Dependency on player; should not update when stage updates
 	 */
+
+	useEffect(() => {
+		const newStage = mergeStage(stage, player);
+		if (!_.isEqual(stage, newStage)) setStage(newStage);
+	}, [setStage, stage, player]);
 
 	/**
 	 * Other notes:
@@ -34,11 +44,6 @@ const Tetris = () => {
 	 * Remove collided concept if possible
 	 */
 
-	const movePlayer = (dir: number) => {
-		if (!checkCollision(player, stage, { x: dir, y: 0 }))
-			updatePlayerPos({ move: { x: dir, y: 0 }, collided: false });
-	};
-
 	/**
 	 * Start game should
 	 * Gameover false
@@ -47,41 +52,30 @@ const Tetris = () => {
 	 * Create player
 	 * Start time
 	 */
+
 	const startGame = () => {
 		setStage(createStage());
-		setDropTime(1000);
 		resetPlayer();
-		setGameOver(false);
-		setScore(0);
-		setRows(0);
-		setLevel(0);
 	};
 
-	const drop = () => {
-		//Increase level when player has cleared 10 lines
-		if (rows > (level + 1) * 10) {
-			setLevel((prev) => prev + 1);
-			//Also increase speed
-			setDropTime(1000 / (level + 1) + 200);
-		}
-		if (!checkCollision(player, stage, { x: 0, y: 1 }))
-			updatePlayerPos({ move: { x: 0, y: 1 }, collided: false });
-		else {
-			if (player.pos.y < 1) {
-				console.log("gameover");
-				setGameOver(true);
-				setDropTime(null);
-			}
-			updatePlayerPos({ move: { x: 0, y: 0 }, collided: true });
-		}
+	const movePlayer = (dir: number) => {
+		updatePlayerPos({ move: { x: dir, y: 0 }, collided: false });
 	};
 
 	const dropPlayer = () => {
-		drop();
+		updatePlayerPos({ move: { x: 0, y: 1 }, collided: false });
+		// if (checkCollision(player, stage)) {
+		// 	updatePlayerPos({ move: { x: 0, y: -1 }, collided: true });
+		// 	// merge(arena, player);
+		// 	// playerReset();
+		// 	// arenaSweep();
+		// 	// updateScore();
+		// }
+		// dropCounter = 0;
 	};
 
-	const move = ({ key }: React.KeyboardEvent<HTMLDivElement>) => {
-		if (!gameOver) {
+	const handleKeyPress = ({ key }: React.KeyboardEvent<HTMLDivElement>) => {
+		if (true) {
 			switch (key) {
 				case "ArrowLeft":
 					movePlayer(-1);
@@ -103,21 +97,17 @@ const Tetris = () => {
 		}
 	};
 
-	useInterval(() => {
-		drop();
-	}, dropTime);
-
 	return (
 		<div
 			className={styles.wrapper}
 			role="button"
 			tabIndex={0}
-			onKeyDown={(e) => move(e)}
+			onKeyDown={(e) => handleKeyPress(e)}
 		>
 			<div className={styles.tetris}>
 				<Stage stage={stage} />
 				<aside>
-					{gameOver ? (
+					{/* {gameOver ? (
 						<Display text={"Game Over"} gameOver={gameOver} />
 					) : (
 						<div>
@@ -125,7 +115,7 @@ const Tetris = () => {
 							<Display text={`Rows: ${rows}`} gameOver={gameOver} />
 							<Display text={`Level: ${level}`} gameOver={gameOver} />
 						</div>
-					)}
+					)} */}
 					<StartButton onClick={startGame} />
 				</aside>
 			</div>

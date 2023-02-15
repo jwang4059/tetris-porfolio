@@ -1,34 +1,39 @@
 import { STAGE_HEIGHT, STAGE_WIDTH } from "./constants";
-import { CoordinateType, PlayerType, StageType } from "./types";
+import { PlayerType, StageType } from "./types";
 
 export const createStage: () => StageType = () => {
-	return new Array(STAGE_HEIGHT).fill(
-		new Array(STAGE_WIDTH).fill({ value: "0", status: "clear" })
-	);
+	return new Array(STAGE_HEIGHT).fill(new Array(STAGE_WIDTH).fill("0"));
 };
 
-export const checkCollision = (
-	player: PlayerType,
-	stage: StageType,
-	move: CoordinateType
-) => {
-	for (let row = 0; row < player.tetromino.length; row++) {
-		for (let col = 0; col < player.tetromino[row].length; col++) {
-			// 1. Check that we're on an actual Tetromino cell
-			if (player.tetromino[row][col] !== "0") {
-				if (
-					// 2. Check that our move is inside the game area height (y)
-					// We shouldn't go through the bottom of the play area
-					!stage[row + player.pos.y + move.y] ||
-					// 3. Check that our move is inside the game areas width (x)
-					!stage[row + player.pos.y + move.y][col + player.pos.x + move.x] ||
-					// 4. Check that the cell we're moving to isn't set to clear
-					stage[row + player.pos.y + move.y][col + player.pos.x + move.x]
-						.status !== "clear"
-				) {
-					return true;
-				}
+export const mergeStage = (stage: StageType, player: PlayerType) => {
+	const result = stage.map((row) => row.slice());
+
+	// Merge current tetromino into board
+	for (let y = 0; y < player.tetromino.length; y++) {
+		for (let x = 0; x < player.tetromino[y].length; x++) {
+			if (player.tetromino[y][x] !== "0") {
+				result[y + player.pos.y][x + player.pos.x] = player.tetromino[y][x];
 			}
 		}
 	}
+
+	return result;
+};
+
+export const checkCollision = (player: PlayerType, stage: StageType) => {
+	const t = player.tetromino;
+	const o = player.pos;
+	for (let y = 0; y < t.length; y++) {
+		for (let x = 0; x < t[y].length; x++) {
+			if (
+				t[y][x] !== "0" &&
+				stage[y + o.y] &&
+				stage[y + o.y][x + o.x] &&
+				stage[y + o.y][x + o.x] !== "0"
+			) {
+				return true;
+			}
+		}
+	}
+	return false;
 };

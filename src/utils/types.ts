@@ -4,12 +4,7 @@ export type TetraminosType = {
 	[key: string]: TetrominoType;
 };
 
-export type CellType = {
-	value: string;
-	status: string;
-};
-
-export type StageType = CellType[][];
+export type StageType = string[][];
 
 export type CoordinateType = {
 	x: number;

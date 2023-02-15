@@ -10,9 +10,7 @@ interface StageProps {
 const Stage = ({ stage }: StageProps) => {
 	return (
 		<div className={styles.stage}>
-			{stage.map((row) =>
-				row.map((cell, x) => <Cell key={x} type={cell.value} />)
-			)}
+			{stage.map((row) => row.map((cell, x) => <Cell key={x} type={cell} />))}
 		</div>
 	);
 };
