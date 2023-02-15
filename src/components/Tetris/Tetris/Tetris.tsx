@@ -17,6 +17,22 @@ const Tetris = () => {
 	const [score, setScore, rows, setRows, level, setLevel] =
 		useGameStatus(rowsCleared);
 
+	/**
+	 * Add UseEffect here
+	 * UseEffect should update stage every time there is a move (aka left,right,drop)
+	 * Dependency on player
+	 */
+
+	/**
+	 * Other notes:
+	 * Detect collision before move
+	 * If move is valid, check if row needs to be cleared
+	 * Check if possible to change sell into one value
+	 * Combine move into one function instead of separate drop and left/right
+	 * Level should be determined by rows cleared (score separate)
+	 * Remove collided concept if possible
+	 */
+
 	const movePlayer = (dir: number) => {
 		if (!checkCollision(player, stage, { x: dir, y: 0 }))
 			updatePlayerPos({ move: { x: dir, y: 0 }, collided: false });
