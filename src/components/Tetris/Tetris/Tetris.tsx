@@ -15,20 +15,20 @@ import { StageType } from "@/utils/types";
 import styles from "./Tetris.module.scss";
 
 const Tetris = () => {
-	const [dropTime, setDropTime] = useState<number | null>(null);
 	const [gameOver, setGameOver] = useState<boolean>(false);
 	const [gameStatus, setGameStatus] = useState<{
 		score: number;
 		rows: number;
 		level: number;
-	}>({ score: 0, rows: 0, level: 1 });
+		dropTime: number | null;
+	}>({ score: 0, rows: 0, level: 0, dropTime: null });
 	const [stage, setStage] = useState<StageType>(createStage());
 	const [stageView, setStageView] = useState<StageType | null>(null);
 	const [player, updatePlayerPos, resetPlayer, playerRotate] = usePlayer();
 
 	useInterval(() => {
 		dropPlayer();
-	}, dropTime);
+	}, gameStatus.dropTime);
 
 	useEffect(() => {
 		const newStageView = mergeStage(stage, player);
@@ -37,10 +37,9 @@ const Tetris = () => {
 
 	const handleStart = () => {
 		setGameOver(false);
-		setGameStatus({ score: 0, rows: 0, level: 1 });
+		setGameStatus({ score: 0, rows: 0, level: 1, dropTime: 1000 });
 		setStage(createStage());
 		resetPlayer();
-		setDropTime(1000);
 	};
 
 	const movePlayer = (offset: number) => {
@@ -58,14 +57,19 @@ const Tetris = () => {
 				console.log("gameover");
 			} else {
 				const result = mergeAndSweepStage(stage, player);
+				const totalRows = gameStatus.rows + result.rowCount;
+				const currLevel = Math.floor(totalRows / 10) + 1;
+				const dropTime = 1000 / currLevel + 200;
+
 				setGameStatus({
 					score:
 						gameStatus.score +
 						(result.rowCount >= 1
 							? linePoints[result.rowCount - 1] * gameStatus.level
 							: 0),
-					rows: gameStatus.rows + result.rowCount,
-					level: Math.floor((gameStatus.rows + result.rowCount) / 10) + 1,
+					rows: totalRows,
+					level: currLevel,
+					dropTime,
 				});
 				setStage(result.newStage);
 				resetPlayer();
@@ -93,7 +97,7 @@ const Tetris = () => {
 					playerRotate(stage, -1);
 					break;
 				case "p": // Needs work
-					setDropTime(null);
+					setGameStatus({ ...gameStatus, dropTime: null });
 					break;
 			}
 		}

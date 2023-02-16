@@ -29,7 +29,6 @@ export const usePlayer = () => {
 	};
 
 	const playerRotate = (stage: StageType, dir: number) => {
-		// Use structuredClone for deep cloning
 		const clonedPlayer: PlayerType = JSON.parse(JSON.stringify(player));
 		clonedPlayer.tetromino = rotateTetromino(clonedPlayer.tetromino, dir);
 
