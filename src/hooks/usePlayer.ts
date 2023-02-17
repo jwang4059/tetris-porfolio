@@ -3,6 +3,7 @@ import {
 	TETROMINOS,
 	rotateTetromino,
 	generateRandTetramino,
+	generateRandQueue,
 } from "@/utils/tetrominos";
 import { checkCollision } from "@/utils/gameHelpers";
 import { STAGE_WIDTH } from "@/utils/constants";
@@ -11,7 +12,8 @@ import { CoordinateType, PlayerType, StageType } from "@/utils/types";
 export const usePlayer = () => {
 	const [player, setPlayer] = useState<PlayerType>({
 		pos: { x: 0, y: 0 },
-		tetromino: TETROMINOS[0],
+		tetromino: TETROMINOS["0"],
+		queue: generateRandQueue().concat(generateRandQueue()),
 	});
 
 	const updatePlayerPos = (move: CoordinateType) => {
@@ -22,9 +24,19 @@ export const usePlayer = () => {
 	};
 
 	const resetplayer = () => {
+		const next = player.queue.shift();
+
+		let tetromino;
+		if (next) tetromino = TETROMINOS[next];
+		else tetromino = generateRandTetramino();
+
 		setPlayer({
 			pos: { x: STAGE_WIDTH / 2 - 2, y: 0 },
-			tetromino: generateRandTetramino(),
+			tetromino: tetromino,
+			queue:
+				player.queue.length > 7
+					? player.queue
+					: player.queue.concat(generateRandQueue()),
 		});
 	};
 

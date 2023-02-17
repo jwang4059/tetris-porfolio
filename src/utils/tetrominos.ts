@@ -1,3 +1,4 @@
+import _ from "lodash";
 import { TetraminosType, TetrominoType } from "./types";
 
 export const TETROMINOS: TetraminosType = {
@@ -62,4 +63,9 @@ export const generateRandTetramino = () => {
 	const randTetromino =
 		tetrominos[Math.floor(Math.random() * tetrominos.length)];
 	return TETROMINOS[randTetromino];
+};
+
+export const generateRandQueue = () => {
+	const tetrominos = ["I", "J", "L", "O", "S", "T", "Z"];
+	return _.shuffle(tetrominos);
 };
