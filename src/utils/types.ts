@@ -1,6 +1,6 @@
 export type TetrominoType = string[][];
 
-export type TetraminosType = {
+export type TetrominosType = {
 	[key: string]: TetrominoType;
 };
 
@@ -13,6 +13,7 @@ export type CoordinateType = {
 
 export type PlayerType = {
 	pos: CoordinateType;
-	tetromino: TetrominoType;
+	tetromino?: TetrominoType;
+	hold?: TetrominoType;
 	queue: string[];
 };

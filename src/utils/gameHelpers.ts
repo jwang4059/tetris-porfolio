@@ -6,6 +6,7 @@ export const createStage: () => StageType = () => {
 };
 
 export const mergeStage = (stage: StageType, player: PlayerType) => {
+	if (!player.tetromino) return stage;
 	const newStage = stage.map((row) => row.slice());
 
 	// Merge current tetromino into board
@@ -50,15 +51,16 @@ export const checkCollision = (
 	player: PlayerType,
 	move: CoordinateType
 ) => {
-	const t = player.tetromino;
-	const o = player.pos;
-	for (let y = 0; y < t.length; y++) {
-		for (let x = 0; x < t[y].length; x++) {
+	if (!player.tetromino) return false;
+	const { pos, tetromino } = player;
+
+	for (let y = 0; y < tetromino.length; y++) {
+		for (let x = 0; x < tetromino[y].length; x++) {
 			if (
-				t[y][x] !== "0" &&
-				(!stage[y + o.y + move.y] ||
-					!stage[y + o.y + move.y][x + o.x + move.x] ||
-					stage[y + o.y + move.y][x + o.x + move.x] !== "0")
+				tetromino[y][x] !== "0" &&
+				(!stage[y + pos.y + move.y] ||
+					!stage[y + pos.y + move.y][x + pos.x + move.x] ||
+					stage[y + pos.y + move.y][x + pos.x + move.x] !== "0")
 			) {
 				return true;
 			}

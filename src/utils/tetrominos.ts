@@ -1,7 +1,7 @@
 import _ from "lodash";
-import { TetraminosType, TetrominoType } from "./types";
+import { TetrominosType, TetrominoType } from "./types";
 
-export const TETROMINOS: TetraminosType = {
+export const TETROMINOS: TetrominosType = {
 	"0": [["0"]],
 	I: [
 		["0", "I", "0", "0"],
@@ -58,14 +58,29 @@ export const rotateTetromino = (matrix: TetrominoType, dir: number) => {
 	return reflectedMatrix;
 };
 
-export const generateRandTetramino = () => {
+export const generateRandTetromino = () => {
 	const tetrominos = ["I", "J", "L", "O", "S", "T", "Z"];
 	const randTetromino =
 		tetrominos[Math.floor(Math.random() * tetrominos.length)];
 	return TETROMINOS[randTetromino];
 };
 
-export const generateRandQueue = () => {
+export const getQueue = (queue: string[]) => {
 	const tetrominos = ["I", "J", "L", "O", "S", "T", "Z"];
-	return _.shuffle(tetrominos);
+
+	while (queue.length < 7) {
+		queue = queue.concat(_.shuffle(tetrominos));
+	}
+
+	return queue;
+};
+
+export const getNextTetromino = (queue: string[]) => {
+	const next = queue.shift();
+
+	let tetromino;
+	if (next) tetromino = TETROMINOS[next];
+	else tetromino = generateRandTetromino();
+
+	return { queue, tetromino };
 };

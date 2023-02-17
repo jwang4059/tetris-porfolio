@@ -24,13 +24,15 @@ const Tetris = () => {
 	}>({ score: 0, rows: 0, level: 0, dropTime: null });
 	const [stage, setStage] = useState<StageType>(createStage());
 	const [stageView, setStageView] = useState<StageType | null>(null);
-	const [player, updatePlayerPos, resetPlayer, playerRotate] = usePlayer();
+	const [player, updatePlayerPos, resetPlayer, playerRotate, playerHold] =
+		usePlayer();
 
 	useInterval(() => {
 		dropPlayer();
 	}, gameStatus.dropTime);
 
 	useEffect(() => {
+		console.log(player.pos);
 		const newStageView = mergeStage(stage, player);
 		if (!_.isEqual(stageView, newStageView)) setStageView(newStageView);
 	}, [setStageView, stageView, stage, player]);
@@ -95,6 +97,9 @@ const Tetris = () => {
 					break;
 				case "z":
 					playerRotate(stage, -1);
+					break;
+				case "Shift":
+					playerHold();
 					break;
 				case "p": // Needs work
 					setGameStatus({ ...gameStatus, dropTime: null });
