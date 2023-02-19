@@ -5,12 +5,13 @@ import {
 	getNextTetromino,
 } from "@/utils/tetrominos";
 import { checkCollision } from "@/utils/gameHelpers";
-import { STAGE_WIDTH } from "@/utils/constants";
+import { START_POS } from "@/utils/constants";
 import { CoordinateType, PlayerType, StageType } from "@/utils/types";
 
 export const usePlayer = () => {
 	const [player, setPlayer] = useState<PlayerType>({
 		pos: { x: 0, y: 0 },
+		hasSwitch: true,
 		queue: getQueue([]),
 	});
 
@@ -26,8 +27,9 @@ export const usePlayer = () => {
 
 		setPlayer({
 			...player,
-			pos: { x: STAGE_WIDTH / 2 - 2, y: 0 },
+			pos: { ...START_POS },
 			tetromino: tetromino,
+			hasSwitch: true,
 			queue: getQueue(queue),
 		});
 	};
@@ -54,20 +56,23 @@ export const usePlayer = () => {
 	};
 
 	const playerHold = () => {
+		if (!player.hasSwitch) return;
 		if (player.hold) {
 			setPlayer({
 				...player,
-				pos: { x: STAGE_WIDTH / 2 - 2, y: 0 },
+				pos: { ...START_POS },
 				tetromino: player.hold,
 				hold: player.tetromino,
+				hasSwitch: false,
 			});
 		} else {
 			const { queue, tetromino } = getNextTetromino(player.queue);
 			setPlayer({
 				...player,
-				pos: { x: STAGE_WIDTH / 2 - 2, y: 0 },
+				pos: { ...START_POS },
 				tetromino: tetromino,
 				hold: player.tetromino,
+				hasSwitch: false,
 				queue: getQueue(queue),
 			});
 		}
