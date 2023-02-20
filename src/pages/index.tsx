@@ -1,4 +1,9 @@
 import Head from "next/head";
+import Header from "@/components/Layout/Header/Header";
+import Footer from "@/components/Layout/Footer/Footer";
+import Introduction from "@/components/Content/Introduction/Introduction";
+import About from "@/components/Content/About/About";
+import Experience from "@/components/Content/Experience/Experience";
 import Tetris from "@/components/Tetris/Tetris/Tetris";
 
 export default function Home() {
@@ -10,9 +15,14 @@ export default function Home() {
 				<meta name="viewport" content="width=device-width, initial-scale=1" />
 				<link rel="icon" href="/favicon.ico" />
 			</Head>
+			<Header />
 			<main>
-				<Tetris />
+				<Introduction />
+				<About />
+				<Experience />
+				{/* <Tetris /> */}
 			</main>
+			<Footer />
 		</>
 	);
 }

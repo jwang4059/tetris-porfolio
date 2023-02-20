@@ -1,5 +1,6 @@
-import Image from "next/image";
 import React from "react";
+import Image from "next/image";
+import profilePic from "public/profile.jpg";
 
 type Props = {};
 
@@ -12,7 +13,11 @@ const Introduction = (props: Props) => {
 			<p className="section__subtitle section__subtitle--intro">
 				Software Engineer
 			</p>
-			<Image src={""} alt={""} />
+			<Image
+				src={profilePic}
+				alt="Picture of the author"
+				className="intro__img"
+			/>
 		</section>
 	);
 };
