@@ -1,10 +1,11 @@
 import React from "react";
+import { SiGithub, SiLinkedin } from "react-icons/si";
 
 type Props = {};
 
 const Footer = (props: Props) => {
 	return (
-		<footer>
+		<footer className="footer">
 			<a href="mailto:jwang4059@gmail.com" className="footer__link">
 				jwang4059@gmail.com
 			</a>
@@ -15,7 +16,9 @@ const Footer = (props: Props) => {
 						target="_blank"
 						rel="noreferrer"
 						className="social-list__link"
-					></a>
+					>
+						<SiLinkedin />
+					</a>
 				</li>
 				<li className="social-list__item">
 					<a
@@ -23,7 +26,9 @@ const Footer = (props: Props) => {
 						target="_blank"
 						rel="noreferrer"
 						className="social-list__link"
-					></a>
+					>
+						<SiGithub />
+					</a>
 				</li>
 			</ul>
 		</footer>

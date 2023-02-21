@@ -10,9 +10,17 @@ const About = (props: Props) => {
 				Software Engineer
 			</p>
 			<div className="about-me__body">
-				<p></p>
+				<p>
+					Lorem ipsum dolor sit amet, consectetur adipisicing elit. Distinctio
+					perspiciatis sapiente voluptatum iure excepturi corporis deserunt
+					animi autem iste magni dolore est itaque provident nostrum assumenda
+					labore laboriosam, repudiandae facilis!
+				</p>
 				<p></p>
 			</div>
+			<a href="#experience" className="btn">
+				Learn More
+			</a>
 		</section>
 	);
 };
