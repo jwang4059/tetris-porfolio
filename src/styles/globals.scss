@@ -161,6 +161,10 @@ header {
 	transition: transform 250ms cubic-bezier(0.5, 0, 0.5, 1);
 }
 
+.nav-open {
+	transform: translateX(0%);
+}
+
 .nav__list {
 	list-style: none;
 	display: flex;
@@ -184,7 +188,7 @@ header {
 }
 
 .nav-toggle {
-	padding: 0.25em;
+	padding: 0.5em;
 	background: transparent;
 	border: 0;
 	cursor: pointer;
@@ -201,7 +205,7 @@ header {
 .hamburger,
 .hamburger::before,
 .hamburger::after {
-	background: var(--clr-dark);
+	background: var(--clr-accent);
 	width: 2em;
 	height: 3px;
 	border-radius: 1em;
@@ -222,6 +226,18 @@ header {
 
 .hamburger::after {
 	bottom: 6px;
+}
+
+.hamburger__open {
+	transform: rotate(0.625turn);
+}
+
+.hamburger__open::before {
+	transform: rotate(90deg) translate(-6px);
+}
+
+.hamburger__open::after {
+	opacity: 0;
 }
 
 // Intro Section
