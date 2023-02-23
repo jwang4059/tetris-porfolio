@@ -45,6 +45,9 @@
 // }
 
 // General
+html {
+	scroll-behavior: smooth;
+}
 
 body {
 	color: var(--clr-dark);
