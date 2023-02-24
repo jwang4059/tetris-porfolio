@@ -1,33 +1,23 @@
 import React from "react";
 import Image from "next/image";
-import { projectsData, iconMap } from "@/utils/data";
+import { ProjectType, projectsData, iconMap } from "@/utils/data";
+import styles from "./Projects.module.scss";
 
 type Props = {};
 
-interface ProjectProps {
-	data: {
-		title: string;
-		subtitle: string;
-		description: string;
-		stack?: string[];
-		repo: string;
-		url?: string;
-	};
-}
-
-const Project = ({ data }: ProjectProps) => {
+const Project = ({ data }: { data: ProjectType }) => {
 	return (
-		<section className="project">
-			<div className="project__image__wrapper">
-				<Image src={""} alt={""} />
+		<section className={styles["project"]}>
+			<div className={styles["project__image__wrapper"]}>
+				<Image src={data.image.src} alt={data.image.alt} fill={true} />
 			</div>
-			<div className="project__info">
-				<h3 className="project__title">{data.title}</h3>
-				<p className="project__subtitle">{data.subtitle}</p>
-				<a className="project__repo" href={data.repo}>
+			<div className={styles["project__info"]}>
+				<h3 className={styles["project__title"]}>{data.title}</h3>
+				<p className={styles["project__subtitle"]}>{data.subtitle}</p>
+				<a className={styles["project__repo"]} href={data.repo}>
 					Source Code
 				</a>
-				<p className="project__description">{data.description}</p>
+				<p className={styles["project__description"]}>{data.description}</p>
 				{/* <div className="project__icons">
 					{data.stack
 						? data.stack.map((logo) => (
@@ -38,7 +28,7 @@ const Project = ({ data }: ProjectProps) => {
 						: null}
 				</div> */}
 				{data?.url ? (
-					<a className="project__link" href={data.url}>
+					<a className={styles["project__link"]} href={data.url}>
 						See Live
 					</a>
 				) : null}
@@ -51,9 +41,11 @@ const Projects = (props: Props) => {
 	return (
 		<section className="my-projects" id="projects">
 			<h2 className="section__title">My Projects</h2>
-			{projectsData.map((project) => (
-				<Project key={project.title} data={project} />
-			))}
+			<div className={styles["projects__wrapper"]}>
+				{projectsData.map((project) => (
+					<Project key={project.title} data={project} />
+				))}
+			</div>
 		</section>
 	);
 };

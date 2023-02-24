@@ -1,3 +1,10 @@
+import { StaticImageData } from "next/image";
+import cmsPic from "public/gatsbyblog.png";
+import tangolandPic from "public/tangoland.png";
+import fabflixPic from "public/fabflix.png";
+import portfolioPIc from "public/portfolio.png";
+import ckiPIc from "public/ucicirclek.png";
+
 import {
 	SiTypescript,
 	SiReact,
@@ -94,10 +101,23 @@ export const iconMap = {
 	},
 };
 
-export const projectsData = [
+export type ProjectType = {
+	image: {
+		src: StaticImageData;
+		alt: string;
+	};
+	title: string;
+	subtitle: string;
+	description: string;
+	stack?: string[];
+	repo: string;
+	url?: string;
+};
+
+export const projectsData: ProjectType[] = [
 	{
 		image: {
-			src: "ucicirclek.png",
+			src: ckiPIc,
 			alt: "UCI Circle K Image",
 		},
 		title: "ucicirclek.xyz",
@@ -118,7 +138,7 @@ export const projectsData = [
 	},
 	{
 		image: {
-			src: "portfolio.png",
+			src: portfolioPIc,
 			alt: "My Portfolio Image",
 		},
 		title: "johnwang.netlify.app",
@@ -130,7 +150,7 @@ export const projectsData = [
 	},
 	{
 		image: {
-			src: "fabflix.png",
+			src: fabflixPic,
 			alt: "Fabflix Image",
 		},
 		title: "Fabflix",
@@ -142,7 +162,7 @@ export const projectsData = [
 	},
 	{
 		image: {
-			src: "tangoland.png",
+			src: tangolandPic,
 			alt: "TangoLand Image",
 		},
 		title: "TangoLand",
@@ -154,7 +174,7 @@ export const projectsData = [
 	},
 	{
 		image: {
-			src: "gatsbyblog.png",
+			src: cmsPic,
 			alt: "Gatsby Blog Image",
 		},
 		title: "ZTM Gatsby + Netlify CMS Starter",
