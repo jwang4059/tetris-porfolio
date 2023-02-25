@@ -9,7 +9,12 @@ const Project = ({ data }: { data: ProjectType }) => {
 	return (
 		<section className={styles["project"]}>
 			<div className={styles["project__image__wrapper"]}>
-				<Image src={data.image.src} alt={data.image.alt} fill={true} />
+				<Image
+					style={{ objectFit: "cover" }}
+					src={data.image.src}
+					alt={data.image.alt}
+					fill={true}
+				/>
 			</div>
 			<div className={styles["project__info"]}>
 				<h3 className={styles["project__title"]}>{data.title}</h3>

@@ -1,6 +1,7 @@
 .projects__wrapper {
 	display: grid;
-	grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+	grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+	column-gap: 24px;
 }
 
 .project {
@@ -9,14 +10,14 @@
 	align-items: center;
 	padding: 1rem;
 	margin: 2rem 0;
-	background-color: blue;
+	background-color: cyan;
 }
 
 .project__image__wrapper {
+	height: 200px;
+	width: 100%;
 	position: relative;
-	height: 300px;
-	width: 300px;
-	max-width: 42rem;
+	overflow: hidden;
 }
 
 .project__info {
