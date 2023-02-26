@@ -1,5 +1,6 @@
 import React from "react";
 import clsx from "clsx";
+import styles from "./NavToggle.module.scss";
 
 interface NavToggleProps {
 	isOpen: boolean;
@@ -10,12 +11,15 @@ const NavToggle = ({ isOpen, onClick }: NavToggleProps) => {
 	return (
 		<button
 			style={isOpen ? { position: "fixed" } : undefined}
-			className="nav-toggle"
+			className={styles["nav-toggle"]}
 			aria-label="toggle navigations"
 			onClick={onClick}
 		>
 			<span
-				className={clsx({ hamburger: true, hamburger__open: isOpen })}
+				className={clsx({
+					[styles["hamburger"]]: true,
+					[styles["hamburger__open"]]: isOpen,
+				})}
 			></span>
 		</button>
 	);

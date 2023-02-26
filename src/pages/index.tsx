@@ -5,7 +5,6 @@ import Introduction from "@/components/Content/Introduction/Introduction";
 import About from "@/components/Content/About/About";
 import Experience from "@/components/Content/Experience/Experience";
 import Projects from "@/components/Content/Projects/Projects";
-import Tetris from "@/components/Tetris/Tetris/Tetris";
 
 export default function Home() {
 	return (
@@ -22,7 +21,6 @@ export default function Home() {
 				<About />
 				<Experience />
 				<Projects />
-				{/* <Tetris /> */}
 			</main>
 			<Footer />
 		</>

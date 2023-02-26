@@ -1,5 +1,6 @@
 import React from "react";
 import Image from "next/image";
+import Tetris from "@/components/Tetris/Tetris/Tetris";
 import { ProjectType, projectsData, iconMap } from "@/utils/data";
 import styles from "./Projects.module.scss";
 
@@ -46,6 +47,7 @@ const Projects = (props: Props) => {
 	return (
 		<section className="my-projects" id="projects">
 			<h2 className="section__title">My Projects</h2>
+			<div>{/* <Tetris /> */}</div>
 			<div className={styles["projects__wrapper"]}>
 				{projectsData.map((project) => (
 					<Project key={project.title} data={project} />
