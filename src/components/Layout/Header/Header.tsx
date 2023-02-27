@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Image from "next/image";
 import clsx from "clsx";
 import NavToggle from "./Nav/NavToggle/NavToggle";
+import { resume } from "@/utils/data";
 import styles from "./Header.module.scss";
 
 type Props = {};
@@ -24,8 +25,8 @@ const Header = (props: Props) => {
 				<ul className={styles["nav__list"]}>
 					<li className={styles["nav__item"]}>
 						<a
-							href="#home"
 							className={styles["nav__link"]}
+							href="#home"
 							onClick={() => setIsOpen(false)}
 						>
 							Home
@@ -33,8 +34,8 @@ const Header = (props: Props) => {
 					</li>
 					<li className={styles["nav__item"]}>
 						<a
-							href="#about"
 							className={styles["nav__link"]}
+							href="#about"
 							onClick={() => setIsOpen(false)}
 						>
 							About Me
@@ -42,8 +43,8 @@ const Header = (props: Props) => {
 					</li>
 					<li className={styles["nav__item"]}>
 						<a
-							href="#experience"
 							className={styles["nav__link"]}
+							href="#experience"
 							onClick={() => setIsOpen(false)}
 						>
 							Experience
@@ -51,8 +52,8 @@ const Header = (props: Props) => {
 					</li>
 					<li className={styles["nav__item"]}>
 						<a
-							href="#projects"
 							className={styles["nav__link"]}
+							href="#projects"
 							onClick={() => setIsOpen(false)}
 						>
 							Projects
@@ -60,11 +61,21 @@ const Header = (props: Props) => {
 					</li>
 					<li className={styles["nav__item"]}>
 						<a
-							href="#contact"
 							className={styles["nav__link"]}
+							href="#contact"
 							onClick={() => setIsOpen(false)}
 						>
 							Contact
+						</a>
+					</li>
+					<li className={styles["nav__item"]}>
+						<a
+							className={styles["nav__link"]}
+							href={resume}
+							target="_blank"
+							rel="noreferrer"
+						>
+							Resume
 						</a>
 					</li>
 				</ul>

@@ -4,6 +4,7 @@ import tangolandPic from "public/tangoland.png";
 import fabflixPic from "public/fabflix.png";
 import portfolioPIc from "public/portfolio.png";
 import ckiPIc from "public/ucicirclek.png";
+import finicastPic from "public/finicast.png";
 
 import {
 	SiTypescript,
@@ -100,6 +101,32 @@ export const iconMap = {
 		icon: SiFramer,
 	},
 };
+
+export type ExperienceType = {
+	image: {
+		src: StaticImageData;
+		alt: string;
+	};
+	company: string;
+	position: string;
+	date: string;
+	description: string;
+	url?: string;
+};
+
+export const experiencesData: ExperienceType[] = [
+	{
+		image: {
+			src: finicastPic,
+			alt: "Finicast Logo Pic",
+		},
+		company: "Finicast, Inc.",
+		position: "Full Stack Engineer",
+		date: "July 2021 - Sep 2022",
+		description: "",
+		url: "https://finicast.com/",
+	},
+];
 
 export type ProjectType = {
 	image: {
