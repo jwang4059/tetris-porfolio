@@ -1,0 +1,33 @@
+.about {
+	background-color: var(--clr-dark);
+	color: var(--clr-light);
+	text-align: center;
+}
+
+.section__title--about {
+	color: var(--clr-accent);
+	position: relative;
+	margin-bottom: 1rem;
+}
+
+.section__title--about::after {
+	content: "";
+	display: block;
+	width: 12rem;
+	height: 1px;
+	margin: 1rem auto;
+	background: var(--clr-light);
+	opacity: 0.25;
+}
+
+.about__body {
+	max-width: 720px;
+	padding: 1rem;
+	margin: 0 auto;
+
+	p {
+		font-size: 1.25rem;
+		line-height: 1.75rem;
+		margin-bottom: 2rem;
+	}
+}
