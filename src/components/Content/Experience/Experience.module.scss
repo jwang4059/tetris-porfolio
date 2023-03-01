@@ -9,16 +9,34 @@
 }
 
 .card {
-	background-color: grey;
+	background-color: var(--clr-accent);
 	max-width: 1080px;
+	display: flex;
 	padding: 1rem;
 	border-radius: 1rem;
+	box-shadow: var(--bs);
 }
 
 .card__image__wrapper {
-	height: 200px;
-	width: 200px;
+	height: 72px;
+	width: 72px;
+	position: relative;
+	overflow: hidden;
 	display: flex;
 	justify-content: center;
 	align-items: center;
+	margin-right: 2rem;
+}
+
+.card__header {
+	display: flex;
+	flex-direction: column;
+
+	span {
+		display: block;
+	}
+}
+
+.card__position {
+	font-style: italic;
 }
