@@ -25,9 +25,11 @@ const Experience = (props: Props) => {
 	return (
 		<section className={styles["experience"]} id="experience">
 			<h2 className="section__title">My Experience</h2>
-			{experiencesData.map((x) => (
-				<Card key={x.company} data={x} />
-			))}
+			<div className={styles["cards__wrapper"]}>
+				{experiencesData.map((x) => (
+					<Card key={x.company} data={x} />
+				))}
+			</div>
 		</section>
 	);
 };

@@ -11,10 +11,10 @@ const Project = ({ data }: { data: ProjectType }) => {
 		<section className={styles["project"]}>
 			<div className={styles["project__image__wrapper"]}>
 				<Image
-					style={{ objectFit: "cover" }}
+					style={{ objectFit: "contain" }}
 					src={data.image.src}
 					alt={data.image.alt}
-					fill={true}
+					fill
 				/>
 			</div>
 			<div className={styles["project__info"]}>
@@ -46,7 +46,7 @@ const Project = ({ data }: { data: ProjectType }) => {
 const Projects = (props: Props) => {
 	return (
 		<section className="my-projects" id="projects">
-			<h2 className="section__title">My Projects</h2>
+			<h2 className={styles["projects__title"]}>My Projects</h2>
 			<div>{/* <Tetris /> */}</div>
 			<div className={styles["projects__wrapper"]}>
 				{projectsData.map((project) => (

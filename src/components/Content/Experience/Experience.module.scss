@@ -1,20 +1,17 @@
-.experience {
-	display: flex;
-	flex-direction: column;
-	align-items: stretch;
-
-	h2 {
-		text-align: center;
-	}
-}
-
 .card {
 	background-color: var(--clr-accent);
-	max-width: 1080px;
+	max-width: 1280px;
 	display: flex;
+	flex-direction: column;
 	padding: 1rem;
 	border-radius: 1rem;
 	box-shadow: var(--bs);
+}
+
+@media (min-width: 640px) {
+	.card {
+		flex-direction: row;
+	}
 }
 
 .card__image__wrapper {
@@ -22,6 +19,7 @@
 	width: 72px;
 	position: relative;
 	overflow: hidden;
+	flex-shrink: 0;
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -39,4 +37,8 @@
 
 .card__position {
 	font-style: italic;
+}
+
+.card__content {
+	flex-shrink: 1;
 }

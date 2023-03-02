@@ -60,7 +60,7 @@ body {
 }
 
 section {
-	padding: 5em 2em;
+	padding: 5rem 2rem;
 }
 
 img {
@@ -98,10 +98,8 @@ strong {
 // Typography
 
 h1,
-h2,
-h3 {
-	line-height: 1;
-	margin: 0;
+h2 {
+	text-align: center;
 }
 
 h1 {
@@ -121,6 +119,7 @@ h3 {
 }
 
 .section__title--intro {
+	text-align: left;
 	font-weight: var(--fw-reg);
 }
 

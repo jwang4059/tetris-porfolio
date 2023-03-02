@@ -123,7 +123,8 @@ export const experiencesData: ExperienceType[] = [
 		company: "Finicast, Inc.",
 		position: "Full Stack Engineer",
 		date: "July 2021 - Sep 2022",
-		description: "",
+		description:
+			"Velit pariatur ea do amet fugiat adipisicing culpa ea cupidatat eiusmod exercitation magna nostrud quis. Non et laborum cupidatat reprehenderit nostrud nostrud officia cillum mollit id veniam. Nisi qui anim do laborum sunt esse laborum id aliqua laborum excepteur ex amet duis. Magna cupidatat pariatur reprehenderit nisi nisi nostrud mollit est occaecat sit mollit occaecat eu velit. Excepteur et proident nulla est consequat dolor tempor. Lorem consectetur dolor aliqua tempor duis ipsum et sit deserunt ut velit anim id. Eiusmod veniam fugiat elit amet minim sunt dolore nostrud sint amet id sunt mollit.",
 		url: "https://finicast.com/",
 	},
 ];
