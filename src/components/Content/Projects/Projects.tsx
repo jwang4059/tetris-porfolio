@@ -20,7 +20,12 @@ const Project = ({ data }: { data: ProjectType }) => {
 			<div className={styles["project__info"]}>
 				<h3 className={styles["project__title"]}>{data.title}</h3>
 				<p className={styles["project__subtitle"]}>{data.subtitle}</p>
-				<a className={styles["project__repo"]} href={data.repo}>
+				<a
+					className={styles["project__repo"]}
+					href={data.repo}
+					target="_blank"
+					rel="noreferrer"
+				>
 					Source Code
 				</a>
 				<p className={styles["project__description"]}>{data.description}</p>
@@ -34,7 +39,12 @@ const Project = ({ data }: { data: ProjectType }) => {
 						: null}
 				</div> */}
 				{data?.url ? (
-					<a className={styles["project__link"]} href={data.url}>
+					<a
+						className={styles["project__link"]}
+						href={data.url}
+						target="_blank"
+						rel="noreferrer"
+					>
 						See Live
 					</a>
 				) : null}
