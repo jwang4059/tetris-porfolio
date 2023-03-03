@@ -124,7 +124,7 @@ export const experiencesData: ExperienceType[] = [
 		position: "Full Stack Engineer",
 		date: "July 2021 - Sep 2022",
 		description:
-			"Velit pariatur ea do amet fugiat adipisicing culpa ea cupidatat eiusmod exercitation magna nostrud quis. Non et laborum cupidatat reprehenderit nostrud nostrud officia cillum mollit id veniam. Nisi qui anim do laborum sunt esse laborum id aliqua laborum excepteur ex amet duis. Magna cupidatat pariatur reprehenderit nisi nisi nostrud mollit est occaecat sit mollit occaecat eu velit. Excepteur et proident nulla est consequat dolor tempor. Lorem consectetur dolor aliqua tempor duis ipsum et sit deserunt ut velit anim id. Eiusmod veniam fugiat elit amet minim sunt dolore nostrud sint amet id sunt mollit.",
+			"Finicast is a financial tech start up focused on building planning software for financial analysts. Finicast allows you to make spreadsheets, create data tables, and generate models. Unlike other spreadsheet tools, Finicast makes it easy to collaborate with others and create financial models for large data sets.",
 		url: "https://finicast.com/",
 	},
 ];
