@@ -1,11 +1,5 @@
 import { StaticImageData } from "next/image";
-import cmsPic from "public/gatsbyblog.png";
-import tangolandPic from "public/tangoland.png";
-import fabflixPic from "public/fabflix.png";
-import portfolioPIc from "public/portfolio.png";
-import ckiPIc from "public/ucicirclek.png";
-import finicastPic from "public/finicast.png";
-
+import { IconType } from "react-icons/lib";
 import {
 	SiTypescript,
 	SiReact,
@@ -27,7 +21,21 @@ import {
 	SiFramer,
 } from "react-icons/si";
 
-export const iconMap = {
+import cmsPic from "public/gatsbyblog.png";
+import tangolandPic from "public/tangoland.png";
+import fabflixPic from "public/fabflix.png";
+import portfolioPIc from "public/portfolio.png";
+import ckiPIc from "public/ucicirclek.png";
+import finicastPic from "public/finicast.png";
+
+type IconMapType = {
+	[index: string]: {
+		name: string;
+		icon: IconType;
+	};
+};
+
+export const iconMap: IconMapType = {
 	typescript: {
 		name: "TypeScript",
 		icon: SiTypescript,
@@ -96,7 +104,7 @@ export const iconMap = {
 		name: "MUI",
 		icon: SiMaterialui,
 	},
-	framer: {
+	motion: {
 		name: "Motion",
 		icon: SiFramer,
 	},
