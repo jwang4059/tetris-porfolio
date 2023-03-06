@@ -51,12 +51,37 @@
 	margin: 1rem 0;
 }
 
+.project__stack {
+	position: relative;
+}
+
+.project__stack__navigation {
+	width: 100%;
+	position: absolute;
+	top: 0.75rem;
+}
+
+.project__stack__navigation__arrow {
+	height: 2rem;
+	width: 2rem;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	padding: 0.5rem;
+	border-radius: 100%;
+}
+
+.project__stack__navigation__arrow:hover {
+	background-color: gray;
+}
+
 .project__icons__list {
 	width: 100%;
 	list-style: none;
-	overflow-x: scroll;
+	overflow: hidden;
 	white-space: nowrap;
 	scrollbar-width: thin;
+	padding: 0 1.5rem;
 }
 
 .project__icons__list__item {
@@ -64,15 +89,15 @@
 	padding: 0.5em;
 	text-align: center;
 
-	span {
-		display: block;
-	}
-
 	.project__icon__image {
+		display: flex;
+		justify-content: center;
+		align-items: flex-end;
 		font-size: 1.75rem;
 	}
 
 	.project__icon__name {
+		display: block;
 		font-size: 1rem;
 	}
 }
