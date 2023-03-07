@@ -79,7 +79,10 @@ const Tetris = () => {
 		}
 	};
 
-	const handleKeyPress = ({ key }: React.KeyboardEvent<HTMLDivElement>) => {
+	const handleKeyPress = (e: React.KeyboardEvent<HTMLDivElement>) => {
+		e.preventDefault();
+
+		const { key } = e;
 		if (!gameOver) {
 			switch (key) {
 				case "ArrowLeft":
@@ -111,7 +114,6 @@ const Tetris = () => {
 	return (
 		<div
 			className={styles.wrapper}
-			role="button"
 			tabIndex={0}
 			onKeyDown={(e) => handleKeyPress(e)}
 		>

@@ -1,12 +1,11 @@
 $stage-height: 20;
 $stage-width: 12;
+$block-size: 20px;
 
 .stage {
-	width: 100%;
-	max-width: 25vw;
 	display: grid;
-	grid-template-rows: repeat($stage-height, calc(25vw / $stage-width));
-	grid-template-columns: repeat($stage-width, 1fr);
+	grid-template-columns: repeat($stage-width, $block-size);
+	grid-template-rows: repeat($stage-height, $block-size);
 	grid-gap: 1px;
 	border: 2px solid #333;
 	background: #111;

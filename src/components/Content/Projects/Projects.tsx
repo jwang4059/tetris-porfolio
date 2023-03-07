@@ -20,31 +20,7 @@ const StackIcon = ({ name, Icon }: { name: string; Icon: IconType }) => (
 const Project = ({ data }: { data: ProjectType }) => {
 	const iconListRef = useRef<HTMLUListElement>(null);
 
-	const showLeft = () => {
-		if (!iconListRef.current) return false;
-
-		if (iconListRef.current.scrollLeft !== 0) return true;
-		else return false;
-	};
-
-	const showRight = () => {
-		if (!iconListRef.current) return false;
-
-		if (
-			iconListRef.current.scrollLeft !==
-			iconListRef.current.scrollWidth - iconListRef.current.clientWidth
-		) {
-			console.log({
-				left: iconListRef.current.scrollLeft,
-				leftMax:
-					iconListRef.current.scrollWidth - iconListRef.current.clientWidth,
-			});
-			return true;
-		} else return false;
-	};
-
 	const scroll = (offset: number) => {
-		console.log(iconListRef.current);
 		if (iconListRef.current) iconListRef.current.scrollLeft += offset;
 	};
 
@@ -72,24 +48,12 @@ const Project = ({ data }: { data: ProjectType }) => {
 				<p className={styles["project__description"]}>{data.description}</p>
 				{data.stack && (
 					<div className={styles["project__stack"]}>
-						<div className={styles["project__stack__navigation"]}>
-							{showLeft() && (
-								<span
-									className={styles["project__stack__navigation__arrow"]}
-									onClick={() => scroll(-10)}
-								>
-									<MdChevronLeft />
-								</span>
-							)}
-							{showRight() && (
-								<span
-									className={styles["project__stack__navigation__arrow"]}
-									onClick={() => scroll(10)}
-								>
-									<MdChevronRight />
-								</span>
-							)}
-						</div>
+						<button
+							className={styles["project__stack__navigation__arrow"]}
+							onClick={() => scroll(-25)}
+						>
+							<MdChevronLeft />
+						</button>
 						<ul ref={iconListRef} className={styles["project__icons__list"]}>
 							{data.stack.map((x) => (
 								<StackIcon
@@ -99,6 +63,12 @@ const Project = ({ data }: { data: ProjectType }) => {
 								/>
 							))}
 						</ul>
+						<button
+							className={styles["project__stack__navigation__arrow"]}
+							onClick={() => scroll(25)}
+						>
+							<MdChevronRight />
+						</button>
 					</div>
 				)}
 				{data.url && (
@@ -118,9 +88,11 @@ const Project = ({ data }: { data: ProjectType }) => {
 
 const Projects = (props: Props) => {
 	return (
-		<section className="my-projects" id="projects">
+		<section className={styles["projects"]} id="projects">
 			<h2 className={styles["projects__title"]}>My Projects</h2>
-			<div>{/* <Tetris /> */}</div>
+			<div>
+				<Tetris />
+			</div>
 			<div className={styles["projects__wrapper"]}>
 				{projectsData.map((project) => (
 					<Project key={project.title} data={project} />

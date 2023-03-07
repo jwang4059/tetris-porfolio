@@ -1,13 +1,12 @@
 .wrapper {
-	width: 100vh;
-	height: 100vh;
-	background-color: black;
-	background-size: cover;
+	// width: 100vh;
+	// height: 100vh;
 	overflow: hidden;
 }
 
 .tetris {
 	display: flex;
+	justify-content: center;
 	align-items: flex-start;
 	padding: 40px;
 	margin: 0 auto;
