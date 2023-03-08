@@ -6,6 +6,7 @@ interface CellProps {
 }
 
 const Cell = ({ type }: CellProps) => {
+	if (type === "0") type = "Empty";
 	return <div className={styles[type]} />;
 };
 

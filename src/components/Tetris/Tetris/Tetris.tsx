@@ -32,7 +32,6 @@ const Tetris = () => {
 	}, gameStatus.dropTime);
 
 	useEffect(() => {
-		console.log(player.pos);
 		const newStageView = mergeStage(stage, player);
 		if (!_.isEqual(stageView, newStageView)) setStageView(newStageView);
 	}, [setStageView, stageView, stage, player]);
@@ -112,12 +111,12 @@ const Tetris = () => {
 	};
 
 	return (
-		<div
-			className={styles.wrapper}
-			tabIndex={0}
-			onKeyDown={(e) => handleKeyPress(e)}
-		>
-			<div className={styles.tetris}>
+		<div className={styles.wrapper}>
+			<div
+				className={styles.tetris}
+				tabIndex={0}
+				onKeyDown={(e) => handleKeyPress(e)}
+			>
 				<Stage stage={stageView} />
 				<aside>
 					{gameOver ? (

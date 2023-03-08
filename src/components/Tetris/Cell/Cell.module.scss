@@ -9,29 +9,34 @@
 }
 
 .I {
-	@include tetromino($color: cyan);
+	@include tetromino($color: #00ffff);
 }
 
 .J {
-	@include tetromino($color: blue);
+	@include tetromino($color: #0000ff);
 }
 
 .L {
-	@include tetromino($color: orange);
+	@include tetromino($color: #ffaa00);
 }
 
 .O {
-	@include tetromino($color: yellow);
+	@include tetromino($color: #ffff00);
 }
 
 .S {
-	@include tetromino($color: green);
+	@include tetromino($color: #00ff00);
 }
 
 .T {
-	@include tetromino($color: purple);
+	@include tetromino($color: #aa00ff);
 }
 
 .Z {
-	@include tetromino($color: red);
+	@include tetromino($color: #ff0000);
+}
+
+.Empty {
+	width: auto;
+	background-color: black;
 }

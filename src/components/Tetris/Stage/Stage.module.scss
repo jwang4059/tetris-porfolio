@@ -7,6 +7,6 @@ $block-size: 20px;
 	grid-template-columns: repeat($stage-width, $block-size);
 	grid-template-rows: repeat($stage-height, $block-size);
 	grid-gap: 1px;
-	border: 2px solid #333;
-	background: #111;
+	border: 1px solid #262626;
+	background-color: #262626;
 }
