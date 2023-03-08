@@ -1,3 +1,17 @@
+$tetris-cyan: #00ffff;
+$tetris-blue: #0000ff;
+$tetris-orange: #ffaa00;
+$tetris-yellow: #ffff00;
+$tetris-green: #00ff00;
+$tetris-purple: #aa00ff;
+$tetris-red: #ff0000;
+
+@mixin empty($color: transparent) {
+	width: auto;
+	background-color: black;
+	border: 1px solid $color;
+}
+
 @mixin tetromino($color: transparent) {
 	width: auto;
 	background-color: $color;
@@ -8,35 +22,62 @@
 	border-left-color: darken($color, 10%);
 }
 
+.Default {
+	@include empty();
+}
+
+.i {
+	@include empty($color: $tetris-cyan);
+}
+
+.j {
+	@include empty($color: $tetris-blue);
+}
+
+.l {
+	@include empty($color: $tetris-orange);
+}
+
+.o {
+	@include empty($color: $tetris-yellow);
+}
+
+.s {
+	@include empty($color: $tetris-green);
+}
+
+.t {
+	@include empty($color: $tetris-purple);
+}
+
+.z {
+	@include empty($color: $tetris-red);
+}
+
 .I {
-	@include tetromino($color: #00ffff);
+	@include tetromino($color: $tetris-cyan);
 }
 
 .J {
-	@include tetromino($color: #0000ff);
+	@include tetromino($color: $tetris-blue);
 }
 
 .L {
-	@include tetromino($color: #ffaa00);
+	@include tetromino($color: $tetris-orange);
 }
 
 .O {
-	@include tetromino($color: #ffff00);
+	@include tetromino($color: $tetris-yellow);
 }
 
 .S {
-	@include tetromino($color: #00ff00);
+	@include tetromino($color: $tetris-green);
 }
 
 .T {
-	@include tetromino($color: #aa00ff);
+	@include tetromino($color: $tetris-purple);
 }
 
 .Z {
-	@include tetromino($color: #ff0000);
-}
-
-.Empty {
-	width: auto;
-	background-color: black;
+	@include tetromino($color: $tetris-red);
 }

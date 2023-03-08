@@ -6,13 +6,15 @@ import Stage from "../Stage/Stage";
 import StartButton from "../StartButton/StartButton";
 import {
 	checkCollision,
+	getHardDropPos,
 	createStage,
 	mergeStage,
 	mergeAndSweepStage,
 } from "@/utils/gameHelpers";
 import { linePoints } from "@/utils/constants";
-import { StageType } from "@/utils/types";
+import { CoordinateType, StageType } from "@/utils/types";
 import styles from "./Tetris.module.scss";
+import { getTetrominoPreview } from "@/utils/tetrominos";
 
 const Tetris = () => {
 	const [gameOver, setGameOver] = useState<boolean>(false);
@@ -23,7 +25,7 @@ const Tetris = () => {
 		dropTime: number | null;
 	}>({ score: 0, rows: 0, level: 0, dropTime: null });
 	const [stage, setStage] = useState<StageType>(createStage());
-	const [stageView, setStageView] = useState<StageType | null>(null);
+	const [stageView, setStageView] = useState<StageType>(stage);
 	const [player, updatePlayerPos, resetPlayer, playerRotate, playerHold] =
 		usePlayer();
 
@@ -32,8 +34,19 @@ const Tetris = () => {
 	}, gameStatus.dropTime);
 
 	useEffect(() => {
-		const newStageView = mergeStage(stage, player);
-		if (!_.isEqual(stageView, newStageView)) setStageView(newStageView);
+		if (player.tetromino) {
+			const dropPreviewPos = getHardDropPos(stage, player);
+			let newStageView = mergeStage(
+				stage,
+				getTetrominoPreview(player.tetromino),
+				{
+					x: player.pos.x + dropPreviewPos.x,
+					y: player.pos.y + dropPreviewPos.y,
+				}
+			);
+			newStageView = mergeStage(newStageView, player.tetromino, player.pos);
+			if (!_.isEqual(stageView, newStageView)) setStageView(newStageView);
+		}
 	}, [setStageView, stageView, stage, player]);
 
 	const handleStart = () => {
@@ -78,6 +91,11 @@ const Tetris = () => {
 		}
 	};
 
+	const hardDropPlayer = () => {
+		updatePlayerPos(getHardDropPos(stage, player));
+		dropPlayer();
+	};
+
 	const handleKeyPress = (e: React.KeyboardEvent<HTMLDivElement>) => {
 		e.preventDefault();
 
@@ -102,6 +120,9 @@ const Tetris = () => {
 					break;
 				case "Shift":
 					playerHold();
+					break;
+				case " ":
+					hardDropPlayer();
 					break;
 				case "p": // Needs work
 					setGameStatus({ ...gameStatus, dropTime: null });

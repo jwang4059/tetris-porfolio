@@ -43,6 +43,12 @@ export const TETROMINOS: TetrominosType = {
 	],
 };
 
+export const getTetrominoPreview = (matrix: TetrominoType | undefined) => {
+	if (!matrix) return matrix;
+
+	return matrix.map((row) => row.map((val) => val.toLowerCase()));
+};
+
 export const rotateTetromino = (matrix: TetrominoType, dir: number) => {
 	// Transpose Matrix
 	const transposedMatrix = matrix[0].map((_, colIndex) =>
