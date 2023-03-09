@@ -1,31 +1,34 @@
-import { STAGE_HEIGHT, STAGE_WIDTH } from "./constants";
 import { CoordinateType, TetrominoType, PlayerType, StageType } from "./types";
 
-export const createStage: () => StageType = () => {
-	return new Array(STAGE_HEIGHT).fill(new Array(STAGE_WIDTH).fill("0"));
+export const createMatrix = (height: number, width: number) => {
+	return new Array(height).fill(new Array(width).fill("0")) as string[][];
 };
 
-export const mergeStage = (
-	stage: StageType,
-	tetromino: TetrominoType | undefined,
-	pos: CoordinateType
+export const mergeMatrix = (
+	matrixA: StageType | string[][] | undefined,
+	matrixB: TetrominoType | string[][] | undefined,
+	pos?: CoordinateType
 ) => {
-	if (!tetromino) return stage;
-	const newStage = stage.map((row) => row.slice());
+	if (!matrixA || !matrixB) return matrixA;
+	pos ??= { x: 0, y: 0 };
+
+	const result = matrixA.map((row) => row.slice());
 
 	// Merge current tetromino into board
-	for (let y = 0; y < tetromino.length; y++) {
-		for (let x = 0; x < tetromino[y].length; x++) {
-			if (tetromino[y][x] !== "0") {
-				newStage[y + pos.y][x + pos.x] = tetromino[y][x];
+	for (let y = 0; y < matrixB.length; y++) {
+		for (let x = 0; x < matrixB[y].length; x++) {
+			if (matrixB[y][x] !== "0") {
+				result[y + pos.y][x + pos.x] = matrixB[y][x];
 			}
 		}
 	}
 
-	return newStage;
+	return result as string[][];
 };
 
-export const sweepStage = (stage: StageType) => {
+export const sweepStage = (stage: StageType | undefined) => {
+	if (!stage) return { stage, rowCount: 0 };
+
 	const newStage = stage.map((row) => row.slice());
 
 	let rowCount = 0;
@@ -45,17 +48,20 @@ export const sweepStage = (stage: StageType) => {
 	return { newStage, rowCount };
 };
 
-export const mergeAndSweepStage = (stage: StageType, player: PlayerType) => {
-	const mergedStage = mergeStage(stage, player.tetromino, player.pos);
+export const mergeAndSweepStage = (
+	stage: StageType | undefined,
+	player: PlayerType
+) => {
+	const mergedStage = mergeMatrix(stage, player.tetromino, player.pos);
 	return sweepStage(mergedStage);
 };
 
 export const checkCollision = (
-	stage: StageType,
+	stage: StageType | undefined,
 	player: PlayerType,
 	move: CoordinateType
 ) => {
-	if (!player.tetromino) return false;
+	if (!stage || !player.tetromino) return false;
 	const { pos, tetromino } = player;
 
 	for (let y = 0; y < tetromino.length; y++) {
@@ -73,7 +79,10 @@ export const checkCollision = (
 	return false;
 };
 
-export const getHardDropPos = (stage: StageType, player: PlayerType) => {
+export const getHardDropPos = (
+	stage: StageType | undefined,
+	player: PlayerType
+) => {
 	let y = 0;
 
 	while (!checkCollision(stage, player, { x: 0, y })) y++;

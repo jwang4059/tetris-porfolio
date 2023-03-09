@@ -2,7 +2,8 @@ import { useState } from "react";
 import {
 	rotateTetromino,
 	getQueue,
-	getNextTetromino,
+	getNextTetrominoType,
+	TETROMINOS,
 } from "@/utils/tetrominos";
 import { checkCollision } from "@/utils/gameHelpers";
 import { START_POS } from "@/utils/constants";
@@ -23,18 +24,19 @@ export const usePlayer = () => {
 	};
 
 	const resetplayer = () => {
-		let { queue, tetromino } = getNextTetromino(player.queue);
+		let { queue, tetrominoType } = getNextTetrominoType(player.queue);
 
 		setPlayer({
 			...player,
 			pos: { ...START_POS },
-			tetromino: tetromino,
+			tetrominoType: tetrominoType,
+			tetromino: TETROMINOS[tetrominoType],
 			hasSwitch: true,
 			queue: getQueue(queue),
 		});
 	};
 
-	const playerRotate = (stage: StageType, dir: number) => {
+	const playerRotate = (stage: StageType | undefined, dir: number) => {
 		const clonedPlayer: PlayerType = JSON.parse(JSON.stringify(player));
 
 		if (!clonedPlayer.tetromino) return;
@@ -61,17 +63,19 @@ export const usePlayer = () => {
 			setPlayer({
 				...player,
 				pos: { ...START_POS },
-				tetromino: player.hold,
-				hold: player.tetromino,
+				tetrominoType: player.hold,
+				tetromino: TETROMINOS[player.hold],
+				hold: player.tetrominoType,
 				hasSwitch: false,
 			});
 		} else {
-			const { queue, tetromino } = getNextTetromino(player.queue);
+			const { queue, tetrominoType } = getNextTetrominoType(player.queue);
 			setPlayer({
 				...player,
 				pos: { ...START_POS },
-				tetromino: tetromino,
-				hold: player.tetromino,
+				tetrominoType: tetrominoType,
+				tetromino: TETROMINOS[tetrominoType],
+				hold: player.tetrominoType,
 				hasSwitch: false,
 				queue: getQueue(queue),
 			});

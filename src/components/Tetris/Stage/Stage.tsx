@@ -4,7 +4,7 @@ import { StageType } from "@/utils/types";
 import styles from "./Stage.module.scss";
 
 interface StageProps {
-	stage: StageType | null;
+	stage?: StageType;
 }
 
 const Stage = ({ stage }: StageProps) => {

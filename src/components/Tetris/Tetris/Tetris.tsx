@@ -7,14 +7,15 @@ import StartButton from "../StartButton/StartButton";
 import {
 	checkCollision,
 	getHardDropPos,
-	createStage,
-	mergeStage,
+	createMatrix,
+	mergeMatrix,
 	mergeAndSweepStage,
 } from "@/utils/gameHelpers";
-import { linePoints } from "@/utils/constants";
+import { linePoints, STAGE_HEIGHT, STAGE_WIDTH } from "@/utils/constants";
 import { CoordinateType, StageType } from "@/utils/types";
 import styles from "./Tetris.module.scss";
 import { getTetrominoPreview } from "@/utils/tetrominos";
+import Hold from "../Hold/Hold";
 
 const Tetris = () => {
 	const [gameOver, setGameOver] = useState<boolean>(false);
@@ -24,8 +25,10 @@ const Tetris = () => {
 		level: number;
 		dropTime: number | null;
 	}>({ score: 0, rows: 0, level: 0, dropTime: null });
-	const [stage, setStage] = useState<StageType>(createStage());
-	const [stageView, setStageView] = useState<StageType>(stage);
+	const [stage, setStage] = useState<StageType | undefined>(
+		createMatrix(STAGE_HEIGHT, STAGE_WIDTH)
+	);
+	const [stageView, setStageView] = useState<StageType | undefined>(stage);
 	const [player, updatePlayerPos, resetPlayer, playerRotate, playerHold] =
 		usePlayer();
 
@@ -36,7 +39,7 @@ const Tetris = () => {
 	useEffect(() => {
 		if (player.tetromino) {
 			const dropPreviewPos = getHardDropPos(stage, player);
-			let newStageView = mergeStage(
+			let newStageView = mergeMatrix(
 				stage,
 				getTetrominoPreview(player.tetromino),
 				{
@@ -44,15 +47,16 @@ const Tetris = () => {
 					y: player.pos.y + dropPreviewPos.y,
 				}
 			);
-			newStageView = mergeStage(newStageView, player.tetromino, player.pos);
-			if (!_.isEqual(stageView, newStageView)) setStageView(newStageView);
+			newStageView = mergeMatrix(newStageView, player.tetromino, player.pos);
+			if (newStageView && !_.isEqual(stageView, newStageView))
+				setStageView(newStageView);
 		}
 	}, [setStageView, stageView, stage, player]);
 
 	const handleStart = () => {
 		setGameOver(false);
 		setGameStatus({ score: 0, rows: 0, level: 1, dropTime: 1000 });
-		setStage(createStage());
+		setStage(createMatrix(STAGE_HEIGHT, STAGE_WIDTH));
 		resetPlayer();
 	};
 
@@ -70,22 +74,20 @@ const Tetris = () => {
 				setGameOver(true);
 				console.log("gameover");
 			} else {
-				const result = mergeAndSweepStage(stage, player);
-				const totalRows = gameStatus.rows + result.rowCount;
+				const { newStage, rowCount } = mergeAndSweepStage(stage, player);
+				const totalRows = gameStatus.rows + rowCount;
 				const currLevel = Math.floor(totalRows / 10) + 1;
 				const dropTime = 1000 / currLevel + 200;
 
 				setGameStatus({
 					score:
 						gameStatus.score +
-						(result.rowCount >= 1
-							? linePoints[result.rowCount - 1] * gameStatus.level
-							: 0),
+						(rowCount >= 1 ? linePoints[rowCount - 1] * gameStatus.level : 0),
 					rows: totalRows,
 					level: currLevel,
 					dropTime,
 				});
-				setStage(result.newStage);
+				setStage(newStage);
 				resetPlayer();
 			}
 		}
@@ -138,6 +140,9 @@ const Tetris = () => {
 				tabIndex={0}
 				onKeyDown={(e) => handleKeyPress(e)}
 			>
+				<aside>
+					<Hold tetrominoType={player.hold} />
+				</aside>
 				<Stage stage={stageView} />
 				<aside>
 					{gameOver ? (

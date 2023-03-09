@@ -64,11 +64,11 @@ export const rotateTetromino = (matrix: TetrominoType, dir: number) => {
 	return reflectedMatrix;
 };
 
-export const generateRandTetromino = () => {
+export const generateRandTetrominoType = () => {
 	const tetrominos = ["I", "J", "L", "O", "S", "T", "Z"];
 	const randTetromino =
 		tetrominos[Math.floor(Math.random() * tetrominos.length)];
-	return TETROMINOS[randTetromino];
+	return randTetromino;
 };
 
 export const getQueue = (queue: string[]) => {
@@ -81,12 +81,8 @@ export const getQueue = (queue: string[]) => {
 	return queue;
 };
 
-export const getNextTetromino = (queue: string[]) => {
+export const getNextTetrominoType = (queue: string[]) => {
 	const next = queue.shift();
 
-	let tetromino;
-	if (next) tetromino = TETROMINOS[next];
-	else tetromino = generateRandTetromino();
-
-	return { queue, tetromino };
+	return { queue, tetrominoType: next || generateRandTetrominoType() };
 };

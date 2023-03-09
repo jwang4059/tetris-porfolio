@@ -1,0 +1,11 @@
+$hold-height: 4;
+$stage-width: 4;
+$hold-width: 20px;
+
+.hold {
+	display: grid;
+	grid-template-columns: repeat($stage-width, $hold-width);
+	grid-template-rows: repeat($hold-height, $hold-width);
+	border: 1px solid #262626;
+	background-color: #262626;
+}

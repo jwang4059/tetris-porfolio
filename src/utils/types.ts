@@ -13,8 +13,9 @@ export type CoordinateType = {
 
 export type PlayerType = {
 	pos: CoordinateType;
+	tetrominoType?: string;
 	tetromino?: TetrominoType;
-	hold?: TetrominoType;
+	hold?: string;
 	hasSwitch: boolean;
 	queue: string[];
 };
