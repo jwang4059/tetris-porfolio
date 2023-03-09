@@ -23,7 +23,7 @@ export const usePlayer = () => {
 		});
 	};
 
-	const resetplayer = () => {
+	const resetplayer = (startOver?: boolean) => {
 		let { queue, tetrominoType } = getNextTetrominoType(player.queue);
 
 		setPlayer({
@@ -31,6 +31,7 @@ export const usePlayer = () => {
 			pos: { ...START_POS },
 			tetrominoType: tetrominoType,
 			tetromino: TETROMINOS[tetrominoType],
+			hold: !startOver ? player.hold : undefined,
 			hasSwitch: true,
 			queue: getQueue(queue),
 		});

@@ -14,7 +14,7 @@ import {
 import { linePoints, STAGE_HEIGHT, STAGE_WIDTH } from "@/utils/constants";
 import { CoordinateType, StageType } from "@/utils/types";
 import styles from "./Tetris.module.scss";
-import { getTetrominoPreview } from "@/utils/tetrominos";
+import { getTetrominoPreview, simplifyTetromino } from "@/utils/tetrominos";
 import Hold from "../Hold/Hold";
 
 const Tetris = () => {
@@ -38,16 +38,20 @@ const Tetris = () => {
 
 	useEffect(() => {
 		if (player.tetromino) {
-			const dropPreviewPos = getHardDropPos(stage, player);
+			const { x, y } = getHardDropPos(stage, player);
 			let newStageView = mergeMatrix(
 				stage,
 				getTetrominoPreview(player.tetromino),
 				{
-					x: player.pos.x + dropPreviewPos.x,
-					y: player.pos.y + dropPreviewPos.y,
+					x: player.pos.x + x,
+					y: player.pos.y + y,
 				}
 			);
-			newStageView = mergeMatrix(newStageView, player.tetromino, player.pos);
+			newStageView = mergeMatrix(
+				newStageView,
+				simplifyTetromino(player.tetromino),
+				player.pos
+			);
 			if (newStageView && !_.isEqual(stageView, newStageView))
 				setStageView(newStageView);
 		}
@@ -57,7 +61,7 @@ const Tetris = () => {
 		setGameOver(false);
 		setGameStatus({ score: 0, rows: 0, level: 1, dropTime: 1000 });
 		setStage(createMatrix(STAGE_HEIGHT, STAGE_WIDTH));
-		resetPlayer();
+		resetPlayer(true);
 	};
 
 	const movePlayer = (offset: number) => {
@@ -140,9 +144,7 @@ const Tetris = () => {
 				tabIndex={0}
 				onKeyDown={(e) => handleKeyPress(e)}
 			>
-				<aside>
-					<Hold tetrominoType={player.hold} />
-				</aside>
+				<Hold tetrominoType={player.hold} />
 				<Stage stage={stageView} />
 				<aside>
 					{gameOver ? (

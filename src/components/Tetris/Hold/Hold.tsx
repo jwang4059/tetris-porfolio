@@ -13,7 +13,7 @@ const Hold = ({ tetrominoType }: HoldProps) => {
 	const board = createMatrix(4, 4);
 	const hold = tetrominoType
 		? mergeMatrix(board, TETROMINOS[tetrominoType])
-		: null;
+		: board;
 
 	return (
 		<div className={styles.hold}>

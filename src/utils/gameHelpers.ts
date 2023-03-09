@@ -14,10 +14,13 @@ export const mergeMatrix = (
 
 	const result = matrixA.map((row) => row.slice());
 
-	// Merge current tetromino into board
 	for (let y = 0; y < matrixB.length; y++) {
 		for (let x = 0; x < matrixB[y].length; x++) {
-			if (matrixB[y][x] !== "0") {
+			if (
+				matrixB[y][x] !== "0" &&
+				result[y + pos.y] &&
+				result[y + pos.y][x + pos.x]
+			) {
 				result[y + pos.y][x + pos.x] = matrixB[y][x];
 			}
 		}

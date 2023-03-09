@@ -4,20 +4,20 @@ import { TetrominosType, TetrominoType } from "./types";
 export const TETROMINOS: TetrominosType = {
 	"0": [["0"]],
 	I: [
-		["0", "I", "0", "0"],
-		["0", "I", "0", "0"],
-		["0", "I", "0", "0"],
-		["0", "I", "0", "0"],
+		["0", "0", "0", "0"],
+		["I", "I", "I", "I"],
+		["0", "0", "0", "0"],
+		["0", "0", "0", "0"],
 	],
 	J: [
-		["0", "J", "0"],
-		["0", "J", "0"],
-		["J", "J", "0"],
+		["J", "0", "0"],
+		["J", "J", "J"],
+		["0", "0", "0"],
 	],
 	L: [
-		["0", "L", "0"],
-		["0", "L", "0"],
-		["0", "L", "L"],
+		["0", "0", "L"],
+		["L", "L", "L"],
+		["0", "0", "0"],
 	],
 
 	O: [
@@ -32,9 +32,9 @@ export const TETROMINOS: TetrominosType = {
 	],
 
 	T: [
-		["0", "0", "0"],
-		["T", "T", "T"],
 		["0", "T", "0"],
+		["T", "T", "T"],
+		["0", "0", "0"],
 	],
 	Z: [
 		["Z", "Z", "0"],
@@ -47,6 +47,12 @@ export const getTetrominoPreview = (matrix: TetrominoType | undefined) => {
 	if (!matrix) return matrix;
 
 	return matrix.map((row) => row.map((val) => val.toLowerCase()));
+};
+
+export const simplifyTetromino = (matrix: TetrominoType) => {
+	if (!matrix) return matrix;
+
+	return matrix.filter((row) => !row.every((val) => val === "0"));
 };
 
 export const rotateTetromino = (matrix: TetrominoType, dir: number) => {
