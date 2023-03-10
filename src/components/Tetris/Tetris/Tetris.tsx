@@ -144,7 +144,7 @@ const Tetris = () => {
 				tabIndex={0}
 				onKeyDown={(e) => handleKeyPress(e)}
 			>
-				<Hold tetrominoType={player.hold} />
+				<Hold tetrominoType={player.hold} hasSwitch={player.hasSwitch} />
 				<Stage stage={stageView} />
 				<aside>
 					{gameOver ? (

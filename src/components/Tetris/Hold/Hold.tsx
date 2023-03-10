@@ -7,9 +7,10 @@ import { TETROMINOS } from "@/utils/tetrominos";
 
 interface HoldProps {
 	tetrominoType?: string;
+	hasSwitch: boolean;
 }
 
-const Hold = ({ tetrominoType }: HoldProps) => {
+const Hold = ({ tetrominoType, hasSwitch }: HoldProps) => {
 	const board = createMatrix(4, 4);
 	const hold = tetrominoType
 		? mergeMatrix(board, TETROMINOS[tetrominoType])
@@ -18,7 +19,9 @@ const Hold = ({ tetrominoType }: HoldProps) => {
 	return (
 		<div className={styles.hold}>
 			{hold &&
-				hold.map((row) => row.map((cell, x) => <Cell key={x} type={cell} />))}
+				hold.map((row) =>
+					row.map((cell, x) => <Cell key={x} type={cell} locked={!hasSwitch} />)
+				)}
 		</div>
 	);
 };

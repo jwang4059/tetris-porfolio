@@ -5,6 +5,7 @@ $tetris-yellow: #ffff00;
 $tetris-green: #00ff00;
 $tetris-purple: #aa00ff;
 $tetris-red: #ff0000;
+$tetris-gray: #808080;
 
 @mixin empty($color: transparent) {
 	width: auto;
@@ -52,6 +53,10 @@ $tetris-red: #ff0000;
 
 .z {
 	@include empty($color: $tetris-red);
+}
+
+.Locked {
+	@include tetromino($color: $tetris-gray);
 }
 
 .I {
