@@ -16,6 +16,7 @@ import { CoordinateType, StageType } from "@/utils/types";
 import styles from "./Tetris.module.scss";
 import { getTetrominoPreview, simplifyTetromino } from "@/utils/tetrominos";
 import Hold from "../Hold/Hold";
+import Next from "../Next/Next";
 
 const Tetris = () => {
 	const [gameOver, setGameOver] = useState<boolean>(false);
@@ -151,6 +152,7 @@ const Tetris = () => {
 						<Display text={"Game Over"} gameOver={gameOver} />
 					) : (
 						<div>
+							<Next queue={player.queue} />
 							<Display
 								text={`Score: ${gameStatus.score}`}
 								gameOver={gameOver}

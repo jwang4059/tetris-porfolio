@@ -1,9 +1,8 @@
 import React from "react";
-import Cell from "../Cell/Cell";
-import { TetrominoType } from "@/utils/types";
+import Board from "../Board/Board";
 import { createMatrix, mergeMatrix } from "@/utils/gameHelpers";
-import styles from "./Hold.module.scss";
 import { TETROMINOS } from "@/utils/tetrominos";
+import styles from "./Hold.module.scss";
 
 interface HoldProps {
 	tetrominoType?: string;
@@ -18,10 +17,7 @@ const Hold = ({ tetrominoType, hasSwitch }: HoldProps) => {
 
 	return (
 		<div className={styles.hold}>
-			{hold &&
-				hold.map((row) =>
-					row.map((cell, x) => <Cell key={x} type={cell} locked={!hasSwitch} />)
-				)}
+			<Board matrix={hold} locked={!hasSwitch} />
 		</div>
 	);
 };

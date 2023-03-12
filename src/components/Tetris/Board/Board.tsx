@@ -1,15 +1,16 @@
 import React from "react";
 import Cell from "../Cell/Cell";
-import styles from "./Next.module.scss";
+import styles from "./Board.module.scss";
 
 interface BoardProps {
-	matrix: string[][];
+	matrix?: string[][];
 	locked?: boolean;
+	large?: boolean;
 }
 
-const Board = ({ matrix, locked }: BoardProps) => {
+const Board = ({ matrix, locked, large }: BoardProps) => {
 	return (
-		<div className={styles.board}>
+		<div className={large ? styles.stage : styles.default}>
 			{matrix &&
 				matrix.map((row) =>
 					row.map((cell, x) => <Cell key={x} type={cell} locked={locked} />)

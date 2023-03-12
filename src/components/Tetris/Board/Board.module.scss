@@ -1,26 +1,26 @@
 $stage-height: 20;
 $stage-width: 12;
+$stage-size: 20px;
 $standard-height: 4;
 $standard-width: 4;
-$block-size: 20px;
+$standard-size: 12px;
 
-@mixin grid(
+@mixin board(
 	$rows: $standard-height,
 	$cols: $standard-width,
-	$size: $block-size
+	$size: $standard-size
 ) {
 	display: grid;
 	grid-template-columns: repeat($cols, $size);
 	grid-template-rows: repeat($rows, $size);
 	border: 1px solid #262626;
 	background-color: #262626;
-	margin-right: 20px;
 }
 
-.board {
-	@include grid();
+.default {
+	@include board();
 }
 
 .stage {
-	@include grid($stage-height, $stage-width, $block-size);
+	@include board($stage-height, $stage-width, $stage-size);
 }

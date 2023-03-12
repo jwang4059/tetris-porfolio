@@ -33,7 +33,7 @@ export const usePlayer = () => {
 			tetromino: TETROMINOS[tetrominoType],
 			hold: !startOver ? player.hold : undefined,
 			hasSwitch: true,
-			queue: getQueue(queue),
+			queue: !startOver ? getQueue(queue) : getQueue([]),
 		});
 	};
 

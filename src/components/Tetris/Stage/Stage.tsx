@@ -1,5 +1,5 @@
 import React from "react";
-import Cell from "../Cell/Cell";
+import Board from "../Board/Board";
 import { StageType } from "@/utils/types";
 import styles from "./Stage.module.scss";
 
@@ -10,8 +10,7 @@ interface StageProps {
 const Stage = ({ stage }: StageProps) => {
 	return (
 		<div className={styles.stage}>
-			{stage &&
-				stage.map((row) => row.map((cell, x) => <Cell key={x} type={cell} />))}
+			<Board matrix={stage} large />
 		</div>
 	);
 };
