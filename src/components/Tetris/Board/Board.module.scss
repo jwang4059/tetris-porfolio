@@ -1,0 +1,26 @@
+$stage-height: 20;
+$stage-width: 12;
+$standard-height: 4;
+$standard-width: 4;
+$block-size: 20px;
+
+@mixin grid(
+	$rows: $standard-height,
+	$cols: $standard-width,
+	$size: $block-size
+) {
+	display: grid;
+	grid-template-columns: repeat($cols, $size);
+	grid-template-rows: repeat($rows, $size);
+	border: 1px solid #262626;
+	background-color: #262626;
+	margin-right: 20px;
+}
+
+.board {
+	@include grid();
+}
+
+.stage {
+	@include grid($stage-height, $stage-width, $block-size);
+}
