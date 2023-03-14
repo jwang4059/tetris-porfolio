@@ -13,7 +13,7 @@ export const usePlayer = () => {
 	const [player, setPlayer] = useState<PlayerType>({
 		pos: { x: 0, y: 0 },
 		hasSwitch: true,
-		queue: getQueue([]),
+		queue: [],
 	});
 
 	const updatePlayerPos = (move: CoordinateType) => {
@@ -24,16 +24,24 @@ export const usePlayer = () => {
 	};
 
 	const resetplayer = (startOver?: boolean) => {
-		let { queue, tetrominoType } = getNextTetrominoType(player.queue);
+		let { hold, queue } = player;
+
+		if (startOver) {
+			hold = undefined;
+			queue = [];
+		}
+
+		queue = getQueue(queue);
+		let { queue: new_queue, tetrominoType } = getNextTetrominoType(queue);
 
 		setPlayer({
 			...player,
 			pos: { ...START_POS },
 			tetrominoType: tetrominoType,
 			tetromino: TETROMINOS[tetrominoType],
-			hold: !startOver ? player.hold : undefined,
+			hold: hold,
 			hasSwitch: true,
-			queue: !startOver ? getQueue(queue) : getQueue([]),
+			queue: new_queue,
 		});
 	};
 

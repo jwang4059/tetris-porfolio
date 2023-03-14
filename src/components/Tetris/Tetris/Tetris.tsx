@@ -77,6 +77,7 @@ const Tetris = () => {
 		} else {
 			if (player.pos.y < 1) {
 				setGameOver(true);
+				setGameStatus({ ...gameStatus, dropTime: null });
 				console.log("gameover");
 			} else {
 				const { newStage, rowCount } = mergeAndSweepStage(stage, player);
@@ -147,7 +148,7 @@ const Tetris = () => {
 			>
 				<Hold tetrominoType={player.hold} hasSwitch={player.hasSwitch} />
 				<Stage stage={stageView} />
-				<aside>
+				<div>
 					{gameOver ? (
 						<Display text={"Game Over"} gameOver={gameOver} />
 					) : (
@@ -165,7 +166,7 @@ const Tetris = () => {
 						</div>
 					)}
 					<StartButton onClick={handleStart} />
-				</aside>
+				</div>
 			</div>
 		</div>
 	);

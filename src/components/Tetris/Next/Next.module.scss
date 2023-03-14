@@ -1,0 +1,18 @@
+.next {
+	background-color: var(--clr-accent);
+	padding: 12px;
+}
+
+.next__title {
+	color: var(--clr-dark);
+	text-align: center;
+}
+
+.next__boards__wrapper {
+	width: min-content;
+}
+
+.next__board__wrapper {
+	background-color: black;
+	padding: 12px 12px;
+}

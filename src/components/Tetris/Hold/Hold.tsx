@@ -1,7 +1,7 @@
 import React from "react";
 import Board from "../Board/Board";
 import { createMatrix, mergeMatrix } from "@/utils/gameHelpers";
-import { TETROMINOS } from "@/utils/tetrominos";
+import { TETROMINOS_TRIMMED } from "@/utils/tetrominos";
 import styles from "./Hold.module.scss";
 
 interface HoldProps {
@@ -10,14 +10,16 @@ interface HoldProps {
 }
 
 const Hold = ({ tetrominoType, hasSwitch }: HoldProps) => {
-	const board = createMatrix(4, 4);
 	const hold = tetrominoType
-		? mergeMatrix(board, TETROMINOS[tetrominoType])
-		: board;
+		? TETROMINOS_TRIMMED[tetrominoType]
+		: createMatrix(2, 4);
 
 	return (
-		<div className={styles.hold}>
-			<Board matrix={hold} locked={!hasSwitch} />
+		<div className={styles["hold"]}>
+			<div className={styles["hold__title"]}>Hold</div>
+			<div className={styles["hold__board__wrapper"]}>
+				<Board matrix={hold} locked={!hasSwitch} trimmed />
+			</div>
 		</div>
 	);
 };

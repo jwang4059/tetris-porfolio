@@ -1,3 +1,14 @@
 .hold {
-	margin-right: 20px;
+	background-color: var(--clr-accent);
+	padding: 12px 0 12px 12px;
+}
+
+.hold__title {
+	color: var(--clr-dark);
+	text-align: center;
+}
+
+.hold__board__wrapper {
+	background-color: black;
+	padding: 24px 12px;
 }

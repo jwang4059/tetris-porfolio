@@ -43,6 +43,37 @@ export const TETROMINOS: TetrominosType = {
 	],
 };
 
+export const TETROMINOS_TRIMMED: TetrominosType = {
+	I: [
+		["I", "I", "I", "I"],
+		["0", "0", "0", "0"],
+	],
+	J: [
+		["J", "0", "0", "0"],
+		["J", "J", "J", "0"],
+	],
+	L: [
+		["0", "0", "L", "0"],
+		["L", "L", "L", "0"],
+	],
+	O: [
+		["0", "O", "O", "0"],
+		["0", "O", "O", "0"],
+	],
+	S: [
+		["0", "S", "S", "0"],
+		["S", "S", "0", "0"],
+	],
+	T: [
+		["0", "T", "0", "0"],
+		["T", "T", "T", "0"],
+	],
+	Z: [
+		["Z", "Z", "0", "0"],
+		["0", "Z", "Z", "0"],
+	],
+};
+
 export const getTetrominoPreview = (matrix: TetrominoType | undefined) => {
 	if (!matrix) return matrix;
 
