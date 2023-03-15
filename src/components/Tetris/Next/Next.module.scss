@@ -1,6 +1,5 @@
 .next {
-	background-color: var(--clr-accent);
-	padding: 12px;
+	width: min-content;
 }
 
 .next__title {
@@ -8,9 +7,9 @@
 	text-align: center;
 }
 
-.next__boards__wrapper {
-	width: min-content;
-}
+// .next__boards__wrapper {
+// 	width: min-content;
+// }
 
 .next__board__wrapper {
 	background-color: black;

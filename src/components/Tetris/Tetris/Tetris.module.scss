@@ -1,11 +1,46 @@
 .wrapper {
 	display: flex;
+	flex-direction: column;
 	justify-content: center;
+	align-items: center;
 }
 
 .tetris {
-	display: flex;
-	justify-content: center;
-	align-items: flex-start;
-	padding: 40px;
+	background-color: var(--clr-accent);
+	display: grid;
+	grid-template-columns: 1fr auto 1fr;
+	grid-template-areas: "hold stage next" "info1 stage info2" ". info3 .";
+	column-gap: 1rem;
+	padding: 1rem;
+}
+
+.hold {
+	grid-area: hold;
+	justify-self: flex-end;
+}
+
+.info1 {
+	grid-area: info1;
+	align-self: flex-end;
+	text-align: right;
+}
+
+.stage {
+	grid-area: stage;
+}
+
+.next {
+	grid-area: next;
+	justify-self: flex-start;
+}
+
+.info2 {
+	grid-area: info2;
+	align-self: flex-end;
+	text-align: left;
+}
+
+.info3 {
+	grid-area: info3;
+	margin-top: 1rem;
 }

@@ -146,25 +146,28 @@ const Tetris = () => {
 				tabIndex={0}
 				onKeyDown={(e) => handleKeyPress(e)}
 			>
-				<Hold tetrominoType={player.hold} hasSwitch={player.hasSwitch} />
-				<Stage stage={stageView} />
-				<div>
-					{gameOver ? (
-						<Display text={"Game Over"} gameOver={gameOver} />
-					) : (
-						<div>
-							<Next queue={player.queue} />
-							<Display
-								text={`Score: ${gameStatus.score}`}
-								gameOver={gameOver}
-							/>
-							<Display text={`Rows: ${gameStatus.rows}`} gameOver={gameOver} />
-							<Display
-								text={`Level: ${gameStatus.level}`}
-								gameOver={gameOver}
-							/>
-						</div>
-					)}
+				<div className={styles["hold"]}>
+					<Hold tetrominoType={player.hold} hasSwitch={player.hasSwitch} />
+				</div>
+				<div className={styles["info1"]}>
+					<Display
+						text="Speed Level"
+						value={gameStatus.level}
+						gameOver={gameOver}
+					/>
+					<Display text="Lines" value={gameStatus.rows} gameOver={gameOver} />
+				</div>
+				<div className={styles["stage"]}>
+					<Stage stage={stageView} />
+				</div>
+				<div className={styles["next"]}>
+					<Next queue={player.queue} />
+				</div>
+				<div className={styles["info2"]}>
+					{/* Time */}
+					<Display text="Score" value={gameStatus.score} gameOver={gameOver} />
+				</div>
+				<div className={styles["info3"]}>
 					<StartButton onClick={handleStart} />
 				</div>
 			</div>
