@@ -3,6 +3,9 @@ import React, { useState, useEffect } from "react";
 import { useInterval, usePlayer } from "@/hooks/index";
 import Display from "../Display/Display";
 import Stage from "../Stage/Stage";
+import Hold from "../Hold/Hold";
+import Next from "../Next/Next";
+import Time from "../Time/Time";
 import StartButton from "../StartButton/StartButton";
 import {
 	checkCollision,
@@ -12,13 +15,12 @@ import {
 	mergeAndSweepStage,
 } from "@/utils/gameHelpers";
 import { linePoints, STAGE_HEIGHT, STAGE_WIDTH } from "@/utils/constants";
-import { CoordinateType, StageType } from "@/utils/types";
-import styles from "./Tetris.module.scss";
+import { StageType } from "@/utils/types";
 import { getTetrominoPreview, simplifyTetromino } from "@/utils/tetrominos";
-import Hold from "../Hold/Hold";
-import Next from "../Next/Next";
+import styles from "./Tetris.module.scss";
 
 const Tetris = () => {
+	const [paused, setPaused] = useState<boolean>(true);
 	const [gameOver, setGameOver] = useState<boolean>(false);
 	const [gameStatus, setGameStatus] = useState<{
 		score: number;
@@ -63,6 +65,7 @@ const Tetris = () => {
 		setGameStatus({ score: 0, rows: 0, level: 1, dropTime: 1000 });
 		setStage(createMatrix(STAGE_HEIGHT, STAGE_WIDTH));
 		resetPlayer(true);
+		setPaused(false);
 	};
 
 	const movePlayer = (offset: number) => {
@@ -77,6 +80,7 @@ const Tetris = () => {
 		} else {
 			if (player.pos.y < 1) {
 				setGameOver(true);
+				setPaused(true);
 				setGameStatus({ ...gameStatus, dropTime: null });
 				console.log("gameover");
 			} else {
@@ -164,7 +168,7 @@ const Tetris = () => {
 					<Next queue={player.queue} />
 				</div>
 				<div className={styles["info2"]}>
-					{/* Time */}
+					<Time paused={paused} />
 					<Display text="Score" value={gameStatus.score} gameOver={gameOver} />
 				</div>
 				<div className={styles["info3"]}>

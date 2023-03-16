@@ -4,11 +4,10 @@ import styles from "./Display.module.scss";
 interface DisplayProps {
 	text: string;
 	value?: string | number;
-	gameOver: boolean;
+	gameOver?: boolean;
 }
 
 const Display = ({ text, value, gameOver }: DisplayProps) => {
-	const status = gameOver ? "gameover" : "ongoing";
 	return (
 		<div className={styles["display"]}>
 			<div className={styles["display__title"]}>{text}</div>
