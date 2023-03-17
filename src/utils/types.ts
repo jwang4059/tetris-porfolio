@@ -6,6 +6,15 @@ export type TetrominosType = {
 
 export type StageType = string[][];
 
+export type GameStateType = "initial" | "playing" | "paused" | "over";
+
+export type GameStatusType = {
+	score: number;
+	rows: number;
+	level: number;
+	dropTime: number | null;
+};
+
 export type CoordinateType = {
 	x: number;
 	y: number;

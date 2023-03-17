@@ -1,5 +1,16 @@
 import { CoordinateType, TetrominoType, PlayerType, StageType } from "./types";
 
+const str_pad_left = (str: number, pad: string, length: number) => {
+	return (new Array(length + 1).join(pad) + str).slice(-length);
+};
+
+export const getTimeStr = (time: number) => {
+	const minutes = Math.floor(time / 60);
+	const seconds = time % 60;
+
+	return str_pad_left(minutes, "0", 2) + ":" + str_pad_left(seconds, "0", 2);
+};
+
 export const createMatrix = (height: number, width: number) => {
 	return new Array(height).fill(new Array(width).fill("0")) as string[][];
 };

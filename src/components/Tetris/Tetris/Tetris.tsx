@@ -5,7 +5,6 @@ import Display from "../Display/Display";
 import Stage from "../Stage/Stage";
 import Hold from "../Hold/Hold";
 import Next from "../Next/Next";
-import Time from "../Time/Time";
 import StartButton from "../StartButton/StartButton";
 import {
 	checkCollision,
@@ -13,27 +12,35 @@ import {
 	createMatrix,
 	mergeMatrix,
 	mergeAndSweepStage,
+	getTimeStr,
 } from "@/utils/gameHelpers";
 import { linePoints, STAGE_HEIGHT, STAGE_WIDTH } from "@/utils/constants";
-import { StageType } from "@/utils/types";
+import { GameStateType, GameStatusType, StageType } from "@/utils/types";
 import { getTetrominoPreview, simplifyTetromino } from "@/utils/tetrominos";
 import styles from "./Tetris.module.scss";
 
 const Tetris = () => {
-	const [paused, setPaused] = useState<boolean>(true);
-	const [gameOver, setGameOver] = useState<boolean>(false);
-	const [gameStatus, setGameStatus] = useState<{
-		score: number;
-		rows: number;
-		level: number;
-		dropTime: number | null;
-	}>({ score: 0, rows: 0, level: 0, dropTime: null });
+	const [time, setTime] = useState<number>(0);
+	const [gameState, setGameState] = useState<GameStateType>("initial");
+	const [gameStatus, setGameStatus] = useState<GameStatusType>({
+		score: 0,
+		rows: 0,
+		level: 0,
+		dropTime: null,
+	});
 	const [stage, setStage] = useState<StageType | undefined>(
 		createMatrix(STAGE_HEIGHT, STAGE_WIDTH)
 	);
 	const [stageView, setStageView] = useState<StageType | undefined>(stage);
 	const [player, updatePlayerPos, resetPlayer, playerRotate, playerHold] =
 		usePlayer();
+
+	useInterval(
+		() => {
+			setTime(time + 1);
+		},
+		gameState !== "playing" ? null : 1000
+	);
 
 	useInterval(() => {
 		dropPlayer();
@@ -61,11 +68,10 @@ const Tetris = () => {
 	}, [setStageView, stageView, stage, player]);
 
 	const handleStart = () => {
-		setGameOver(false);
+		setGameState("playing");
 		setGameStatus({ score: 0, rows: 0, level: 1, dropTime: 1000 });
 		setStage(createMatrix(STAGE_HEIGHT, STAGE_WIDTH));
 		resetPlayer(true);
-		setPaused(false);
 	};
 
 	const movePlayer = (offset: number) => {
@@ -79,8 +85,7 @@ const Tetris = () => {
 			updatePlayerPos({ x: 0, y: 1 });
 		} else {
 			if (player.pos.y < 1) {
-				setGameOver(true);
-				setPaused(true);
+				setGameState("over");
 				setGameStatus({ ...gameStatus, dropTime: null });
 				console.log("gameover");
 			} else {
@@ -112,7 +117,7 @@ const Tetris = () => {
 		e.preventDefault();
 
 		const { key } = e;
-		if (!gameOver) {
+		if (gameState !== "over") {
 			switch (key) {
 				case "ArrowLeft":
 					movePlayer(-1);
@@ -154,12 +159,8 @@ const Tetris = () => {
 					<Hold tetrominoType={player.hold} hasSwitch={player.hasSwitch} />
 				</div>
 				<div className={styles["info1"]}>
-					<Display
-						text="Speed Level"
-						value={gameStatus.level}
-						gameOver={gameOver}
-					/>
-					<Display text="Lines" value={gameStatus.rows} gameOver={gameOver} />
+					<Display text="Speed Level" value={gameStatus.level} />
+					<Display text="Lines" value={gameStatus.rows} />
 				</div>
 				<div className={styles["stage"]}>
 					<Stage stage={stageView} />
@@ -168,8 +169,8 @@ const Tetris = () => {
 					<Next queue={player.queue} />
 				</div>
 				<div className={styles["info2"]}>
-					<Time paused={paused} />
-					<Display text="Score" value={gameStatus.score} gameOver={gameOver} />
+					<Display text="Time" value={getTimeStr(time)} />
+					<Display text="Score" value={gameStatus.score} />
 				</div>
 				<div className={styles["info3"]}>
 					<StartButton onClick={handleStart} />
