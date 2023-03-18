@@ -11,6 +11,10 @@ export const getTimeStr = (time: number) => {
 	return str_pad_left(minutes, "0", 2) + ":" + str_pad_left(seconds, "0", 2);
 };
 
+export const getDropTime = (currLevel: number) => {
+	return 1000 / currLevel + 200;
+};
+
 export const createMatrix = (height: number, width: number) => {
 	return new Array(height).fill(new Array(width).fill("0")) as string[][];
 };

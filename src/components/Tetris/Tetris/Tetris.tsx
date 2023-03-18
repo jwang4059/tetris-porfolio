@@ -13,6 +13,7 @@ import {
 	mergeMatrix,
 	mergeAndSweepStage,
 	getTimeStr,
+	getDropTime,
 } from "@/utils/gameHelpers";
 import { linePoints, STAGE_HEIGHT, STAGE_WIDTH } from "@/utils/constants";
 import { GameStateType, GameStatusType, StageType } from "@/utils/types";
@@ -67,11 +68,28 @@ const Tetris = () => {
 		}
 	}, [setStageView, stageView, stage, player]);
 
+	const handlePause = () => {
+		if (gameState !== "paused") {
+			setGameStatus({ ...gameStatus, dropTime: null });
+			setGameState("paused");
+		} else {
+			setGameState("playing");
+			setGameStatus({
+				...gameStatus,
+				dropTime: getDropTime(gameStatus.level),
+			});
+		}
+	};
+
 	const handleStart = () => {
-		setGameState("playing");
-		setGameStatus({ score: 0, rows: 0, level: 1, dropTime: 1000 });
-		setStage(createMatrix(STAGE_HEIGHT, STAGE_WIDTH));
-		resetPlayer(true);
+		if (gameState === "playing" || gameState === "paused") {
+			handlePause();
+		} else {
+			setGameState("playing");
+			setGameStatus({ score: 0, rows: 0, level: 1, dropTime: 1000 });
+			setStage(createMatrix(STAGE_HEIGHT, STAGE_WIDTH));
+			resetPlayer(true);
+		}
 	};
 
 	const movePlayer = (offset: number) => {
@@ -92,7 +110,7 @@ const Tetris = () => {
 				const { newStage, rowCount } = mergeAndSweepStage(stage, player);
 				const totalRows = gameStatus.rows + rowCount;
 				const currLevel = Math.floor(totalRows / 10) + 1;
-				const dropTime = 1000 / currLevel + 200;
+				const dropTime = getDropTime(currLevel);
 
 				setGameStatus({
 					score:
@@ -117,7 +135,7 @@ const Tetris = () => {
 		e.preventDefault();
 
 		const { key } = e;
-		if (gameState !== "over") {
+		if (gameState === "playing" || key === "p") {
 			switch (key) {
 				case "ArrowLeft":
 					movePlayer(-1);
@@ -141,8 +159,8 @@ const Tetris = () => {
 				case " ":
 					hardDropPlayer();
 					break;
-				case "p": // Needs work
-					setGameStatus({ ...gameStatus, dropTime: null });
+				case "p":
+					handlePause();
 					break;
 			}
 		}
@@ -173,7 +191,7 @@ const Tetris = () => {
 					<Display text="Score" value={gameStatus.score} />
 				</div>
 				<div className={styles["info3"]}>
-					<StartButton onClick={handleStart} />
+					<StartButton gameState={gameState} onClick={handleStart} />
 				</div>
 			</div>
 		</div>

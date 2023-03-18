@@ -12,6 +12,7 @@
 	grid-template-areas: "hold stage next" "info1 stage info2" ". info3 .";
 	column-gap: 1rem;
 	padding: 1rem;
+	font-family: var(--ff-secondary);
 }
 
 .hold {
@@ -42,5 +43,5 @@
 
 .info3 {
 	grid-area: info3;
-	margin-top: 1rem;
+	text-align: center;
 }
