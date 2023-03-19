@@ -15,7 +15,7 @@ const textMap: { [key: string]: string } = {
 
 const StartButton = ({ gameState, onClick }: StartButtonProps) => {
 	return (
-		<button className={styles.startbutton} onClick={onClick}>
+		<button className={styles[gameState]} onClick={onClick}>
 			{textMap[gameState]}
 		</button>
 	);

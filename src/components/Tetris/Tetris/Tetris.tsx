@@ -177,8 +177,16 @@ const Tetris = () => {
 					<Hold tetrominoType={player.hold} hasSwitch={player.hasSwitch} />
 				</div>
 				<div className={styles["info1"]}>
-					<Display text="Speed Level" value={gameStatus.level} />
-					<Display text="Lines" value={gameStatus.rows} />
+					<Display
+						text="Speed Level"
+						value={gameStatus.level}
+						gameOver={gameState === "over"}
+					/>
+					<Display
+						text="Lines"
+						value={gameStatus.rows}
+						gameOver={gameState === "over"}
+					/>
 				</div>
 				<div className={styles["stage"]}>
 					<Stage stage={stageView} />
@@ -187,8 +195,16 @@ const Tetris = () => {
 					<Next queue={player.queue} />
 				</div>
 				<div className={styles["info2"]}>
-					<Display text="Time" value={getTimeStr(time)} />
-					<Display text="Score" value={gameStatus.score} />
+					<Display
+						text="Time"
+						value={getTimeStr(time)}
+						gameOver={gameState === "over"}
+					/>
+					<Display
+						text="Score"
+						value={gameStatus.score}
+						gameOver={gameState === "over"}
+					/>
 				</div>
 				<div className={styles["info3"]}>
 					<StartButton gameState={gameState} onClick={handleStart} />

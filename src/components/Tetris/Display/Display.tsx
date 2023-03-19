@@ -1,3 +1,4 @@
+import clsx from "clsx";
 import React from "react";
 import styles from "./Display.module.scss";
 
@@ -10,8 +11,8 @@ interface DisplayProps {
 const Display = ({ text, value, gameOver }: DisplayProps) => {
 	return (
 		<div className={styles["display"]}>
-			<div className={styles["display__title"]}>{text}</div>
-			<div className={styles["display__value"]}>{value}</div>
+			<div>{text}</div>
+			<div className={clsx(gameOver && styles["over"])}>{value}</div>
 		</div>
 	);
 };
