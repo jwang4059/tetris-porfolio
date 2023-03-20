@@ -2,7 +2,8 @@
 	.projects__wrapper {
 		display: grid;
 		grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-		column-gap: 24px;
+		column-gap: 2rem;
+		row-gap: 2.5rem;
 	}
 }
 
@@ -12,6 +13,7 @@
 
 .projects__title {
 	color: var(--clr-accent);
+	margin-bottom: 1.5rem;
 }
 
 .project {
@@ -19,7 +21,6 @@
 	flex-direction: column;
 	align-items: center;
 	padding: 1rem;
-	margin: 2rem 0;
 	background-color: #bfdbfe;
 	box-shadow: 0.25em 0.25em 0.75em rgba(0, 0, 0, 0.25),
 		0.125em 0.125em 0.25em rgba(0, 0, 0, 0.15);
