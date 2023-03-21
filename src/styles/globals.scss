@@ -62,39 +62,10 @@ section {
 	padding: 5rem 2rem;
 }
 
-img {
-	display: block;
-	max-width: 100%;
-}
-
-strong {
-	font-weight: var(--fw-bold);
-}
-
 :focus {
 	outline: 3px solid var(--clr-accent);
 	outline-offset: 3px;
 }
-
-.btn {
-	display: inline-block;
-	padding: 0.5em 1.5em;
-	background: var(--clr-accent);
-	color: var(--clr-dark);
-	text-decoration: none;
-	cursor: pointer;
-	font-size: 0.8em;
-	text-transform: uppercase;
-	letter-spacing: 2px;
-	font-weight: var(--fw-bold);
-	transition: transform 200ms ease-in-out;
-}
-
-.btn:hover {
-	transform: scale(1.1);
-}
-
-// Typography
 
 h1,
 h2 {
@@ -111,78 +82,4 @@ h2 {
 
 h3 {
 	font-size: var(--fs-h3);
-}
-
-.section__title {
-	margin-bottom: 0.25em;
-}
-
-.section__title--intro {
-	text-align: left;
-	font-weight: var(--fw-reg);
-}
-
-.section__title--intro strong {
-	display: block;
-}
-
-.section__subtitle {
-	margin: 0;
-	font-size: var(--fs-h3);
-}
-
-.section__subtitle--intro,
-.section__subtitle--about {
-	background: var(--clr-accent);
-	font-family: var(--ff-secondary);
-	padding: 0.25em 1em;
-	margin-bottom: 1em;
-}
-
-// Intro Section
-.intro {
-	position: relative;
-}
-
-.intro__img {
-	height: 24rem;
-	width: 100%;
-	object-fit: cover;
-	box-shadow: var(--bs);
-}
-
-.section__subtitle--intro {
-	display: inline-block;
-}
-
-@media (min-width: 600px) {
-	.intro {
-		display: grid;
-		width: min-content;
-		margin: 0 auto;
-		grid-column-gap: 1em;
-		grid-template-areas:
-			"img title"
-			"img subtitle";
-		grid-template-columns: min-content max-content;
-	}
-
-	.intro__img {
-		height: 16rem;
-		width: 12rem;
-		min-width: 250px;
-		grid-area: img;
-		position: relative;
-		z-index: 2;
-	}
-
-	.section__subtitle--intro {
-		align-self: flex-start;
-		grid-column: -1/1;
-		grid-row: 2;
-		text-align: right;
-		position: relative;
-		left: -1.5em;
-		width: calc(100% + 1.5em);
-	}
 }

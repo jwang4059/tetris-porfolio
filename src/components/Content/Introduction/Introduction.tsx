@@ -1,22 +1,19 @@
 import React from "react";
 import Image from "next/image";
 import profilePic from "public/profile.jpg";
+import styles from "./Introduction.module.scss";
 
-type Props = {};
-
-const Introduction = (props: Props) => {
+const Introduction = () => {
 	return (
-		<section className="intro" id="home">
-			<h1 className="section__title section__title--intro">
+		<section className={styles["intro"]} id="home">
+			<h1 className={styles["intro__title"]}>
 				Hi, I am <strong>John Wang</strong>
 			</h1>
-			<p className="section__subtitle section__subtitle--intro">
-				Software Engineer
-			</p>
+			<p className={styles["intro__subtitle"]}>Software Engineer</p>
 			<Image
+				className={styles["intro__img"]}
 				src={profilePic}
 				alt="Picture of the author"
-				className="intro__img"
 			/>
 		</section>
 	);

@@ -3,8 +3,6 @@ import Image from "next/image";
 import { ExperienceType, experiencesData } from "@/utils/data";
 import styles from "./Experience.module.scss";
 
-type Props = {};
-
 const Card = ({ data }: { data: ExperienceType }) => (
 	<div className={styles["card"]}>
 		<div className={styles["card__header"]}>
@@ -28,10 +26,10 @@ const Card = ({ data }: { data: ExperienceType }) => (
 	</div>
 );
 
-const Experience = (props: Props) => {
+const Experience = () => {
 	return (
 		<section className={styles["experience"]} id="experience">
-			<h2 className="section__title">My Experience</h2>
+			<h2 className={styles["experience__title"]}>My Experience</h2>
 			<div className={styles["cards__wrapper"]}>
 				{experiencesData.map((x) => (
 					<Card key={x.company} data={x} />

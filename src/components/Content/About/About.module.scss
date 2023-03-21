@@ -4,13 +4,13 @@
 	text-align: center;
 }
 
-.section__title--about {
+.about__title {
 	color: var(--clr-accent);
 	position: relative;
 	margin-bottom: 1rem;
 }
 
-.section__title--about::after {
+.about__title::after {
 	content: "";
 	display: block;
 	width: 12rem;
@@ -30,4 +30,22 @@
 		line-height: 1.75rem;
 		margin-bottom: 2rem;
 	}
+}
+
+.about__button {
+	display: inline-block;
+	padding: 0.5em 1.5em;
+	background: var(--clr-accent);
+	color: var(--clr-dark);
+	text-decoration: none;
+	cursor: pointer;
+	font-size: 0.8em;
+	text-transform: uppercase;
+	letter-spacing: 2px;
+	font-weight: var(--fw-bold);
+	transition: transform 200ms ease-in-out;
+}
+
+.about__button:hover {
+	transform: scale(1.1);
 }

@@ -1,12 +1,10 @@
-import React, { useRef } from "react";
 import Image from "next/image";
+import React, { useRef } from "react";
+import { IconType } from "react-icons/lib";
+import { MdChevronLeft, MdChevronRight } from "react-icons/md";
 import Tetris from "@/components/Tetris/Tetris/Tetris";
 import { ProjectType, projectsData, iconMap } from "@/utils/data";
 import styles from "./Projects.module.scss";
-import { IconType } from "react-icons/lib";
-import { MdChevronLeft, MdChevronRight } from "react-icons/md";
-
-type Props = {};
 
 const StackIcon = ({ name, Icon }: { name: string; Icon: IconType }) => (
 	<li className={styles["project__icons__list__item"]}>
@@ -86,7 +84,7 @@ const Project = ({ data }: { data: ProjectType }) => {
 	);
 };
 
-const Projects = (props: Props) => {
+const Projects = () => {
 	return (
 		<section className={styles["projects"]} id="projects">
 			<h2 className={styles["projects__title"]}>My Projects</h2>
