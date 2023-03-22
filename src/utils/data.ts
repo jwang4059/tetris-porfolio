@@ -19,6 +19,8 @@ import {
 	SiTailwindcss,
 	SiMaterialui,
 	SiFramer,
+	SiStyledcomponents,
+	SiExpo,
 } from "react-icons/si";
 
 import cmsPic from "public/gatsbyblog.png";
@@ -26,6 +28,7 @@ import tangolandPic from "public/tangoland.png";
 import fabflixPic from "public/fabflix.png";
 import portfolioPIc from "public/portfolio.png";
 import ckiPIc from "public/ucicirclek.png";
+import feelPic from "public/feel.jpg";
 import finicastPic from "public/finicast.png";
 
 type IconMapType = {
@@ -43,6 +46,14 @@ export const iconMap: IconMapType = {
 	react: {
 		name: "React",
 		icon: SiReact,
+	},
+	native: {
+		name: "React Native",
+		icon: SiReact,
+	},
+	expo: {
+		name: "Expo",
+		icon: SiExpo,
 	},
 	redux: {
 		name: "Redux",
@@ -100,6 +111,10 @@ export const iconMap: IconMapType = {
 		name: "tailwindcss",
 		icon: SiTailwindcss,
 	},
+	styled: {
+		name: "styled components",
+		icon: SiStyledcomponents,
+	},
 	mui: {
 		name: "MUI",
 		icon: SiMaterialui,
@@ -153,6 +168,18 @@ export type ProjectType = {
 export const projectsData: ProjectType[] = [
 	{
 		image: {
+			src: feelPic,
+			alt: "Feel Image",
+		},
+		title: "Feel",
+		subtitle: "Mobile Application",
+		description:
+			"Feel is a mobile application used to better understand one's feelings. By learning about and exploring different emotions, users can better recognize what they are feeling and process their emotions.",
+		stack: ["native", "expo", "styled", "typescript"],
+		repo: "https://github.com/jwang4059/Feel",
+	},
+	{
+		image: {
 			src: ckiPIc,
 			alt: "UCI Circle K Image",
 		},
@@ -178,7 +205,7 @@ export const projectsData: ProjectType[] = [
 		},
 		title: "johnwang.netlify.app",
 		subtitle: "Portfolio",
-		description: `This is my portfolio website. It is clean, simple, and built with modern web development technology such as TypeScript, React, GatsbyJS, Tailwind CSS, and Framer Motion.`,
+		description: `This is my previous portfolio website. It is clean, simple, and built with modern web development technology such as TypeScript, React, GatsbyJS, Tailwind CSS, and Framer Motion.`,
 		stack: ["react", "gatsby", "typescript", "tailwind", "motion"],
 		repo: "https://github.com/jwang4059/jwang4059-portfolio",
 	},
