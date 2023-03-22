@@ -2,9 +2,7 @@ import React from "react";
 import { SiGithub, SiLinkedin } from "react-icons/si";
 import styles from "./Footer.module.scss";
 
-type Props = {};
-
-const Footer = (props: Props) => {
+const Footer = () => {
 	return (
 		<footer className={styles["footer"]} id="contact">
 			<a href="mailto:jwang4059@gmail.com" className={styles["footer__link"]}>

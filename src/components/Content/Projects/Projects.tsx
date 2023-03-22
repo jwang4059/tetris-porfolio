@@ -1,7 +1,9 @@
 import Image from "next/image";
 import React, { useRef } from "react";
+import { useWindowDimensions } from "@/hooks";
 import { IconType } from "react-icons/lib";
 import { MdChevronLeft, MdChevronRight } from "react-icons/md";
+import { SiGithub } from "react-icons/si";
 import Tetris from "@/components/Tetris/Tetris/Tetris";
 import { ProjectType, projectsData, iconMap } from "@/utils/data";
 import styles from "./Projects.module.scss";
@@ -35,14 +37,17 @@ const Project = ({ data }: { data: ProjectType }) => {
 			<div className={styles["project__info"]}>
 				<h3 className={styles["project__title"]}>{data.title}</h3>
 				<p className={styles["project__subtitle"]}>{data.subtitle}</p>
-				<a
-					className={styles["project__repo"]}
-					href={data.repo}
-					target="_blank"
-					rel="noreferrer"
-				>
-					Source Code
-				</a>
+				<div className={styles["project__repo__wrapper"]}>
+					<a
+						className={styles["project__repo"]}
+						href={data.repo}
+						target="_blank"
+						rel="noreferrer"
+						role="button"
+					>
+						<SiGithub /> Github
+					</a>
+				</div>
 				<p className={styles["project__description"]}>{data.description}</p>
 				{data.stack && (
 					<div className={styles["project__stack"]}>
@@ -85,12 +90,13 @@ const Project = ({ data }: { data: ProjectType }) => {
 };
 
 const Projects = () => {
+	const { width } = useWindowDimensions();
+
 	return (
 		<section className={styles["projects"]} id="projects">
 			<h2 className={styles["projects__title"]}>My Projects</h2>
-			<div>
-				<Tetris />
-			</div>
+			{width && width > 640 && <Tetris />}
+
 			<div className={styles["projects__wrapper"]}>
 				{projectsData.map((project) => (
 					<Project key={project.title} data={project} />
