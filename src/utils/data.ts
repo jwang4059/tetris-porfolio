@@ -245,4 +245,4 @@ export const projectsData: ProjectType[] = [
 ];
 
 export const resume =
-	"https://drive.google.com/file/d/16NnpfZ7YeX5WKork8Na5vuBpjn1xHs2G/view?usp=sharing";
+	"https://drive.google.com/file/d/1ySPUwHpSqGlgrkIwiv_c2POsztZ3MMX_/view?usp=sharing";
