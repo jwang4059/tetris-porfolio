@@ -24,10 +24,14 @@
 	font-family: var(--ff-secondary);
 }
 
-.intro__img {
+.intro__image__wrapper {
 	height: 24rem;
 	width: 100%;
-	object-fit: cover;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	position: relative;
+	overflow: hidden;
 	box-shadow: var(--bs);
 }
 
@@ -53,12 +57,11 @@
 		width: calc(100% + 1.5em);
 	}
 
-	.intro__img {
+	.intro__image__wrapper {
 		height: 16rem;
 		width: 12rem;
 		min-width: 250px;
 		grid-area: img;
-		position: relative;
 		z-index: 2;
 	}
 }

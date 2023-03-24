@@ -10,11 +10,16 @@ const Introduction = () => {
 				Hi, I am <strong>John Wang</strong>
 			</h1>
 			<p className={styles["intro__subtitle"]}>Software Engineer</p>
-			<Image
-				className={styles["intro__img"]}
-				src={profilePic}
-				alt="Picture of the author"
-			/>
+			<div className={styles["intro__image__wrapper"]}>
+				<Image
+					style={{ objectFit: "cover" }}
+					src={profilePic}
+					alt="Picture of the author"
+					fill
+					sizes="(max-width: 600px) 100vw, 33vw"
+					priority
+				/>
+			</div>
 		</section>
 	);
 };
