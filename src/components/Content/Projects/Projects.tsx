@@ -53,6 +53,7 @@ const Project = ({ data }: { data: ProjectType }) => {
 					<div className={styles["project__stack"]}>
 						<button
 							className={styles["project__stack__navigation__arrow"]}
+							aria-label="Scroll Left"
 							onClick={() => scroll(-25)}
 						>
 							<MdChevronLeft />
@@ -68,6 +69,7 @@ const Project = ({ data }: { data: ProjectType }) => {
 						</ul>
 						<button
 							className={styles["project__stack__navigation__arrow"]}
+							aria-label="Scroll Right"
 							onClick={() => scroll(25)}
 						>
 							<MdChevronRight />

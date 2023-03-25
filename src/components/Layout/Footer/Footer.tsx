@@ -15,6 +15,8 @@ const Footer = () => {
 						href="https://www.linkedin.com/in/jwang4059/"
 						target="_blank"
 						rel="noreferrer"
+						role="button"
+						aria-label="John's LinkedIn"
 					>
 						<SiLinkedin />
 					</a>
@@ -25,6 +27,8 @@ const Footer = () => {
 						href="https://github.com/jwang4059"
 						target="_blank"
 						rel="noreferrer"
+						role="button"
+						aria-label="John's Github"
 					>
 						<SiGithub />
 					</a>
