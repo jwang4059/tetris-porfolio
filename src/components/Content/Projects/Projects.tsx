@@ -32,6 +32,7 @@ const Project = ({ data }: { data: ProjectType }) => {
 					src={data.image.src}
 					alt={data.image.alt}
 					fill
+					sizes="(max-width: 600px) 100vw, 33vw"
 				/>
 			</div>
 			<div className={styles["project__info"]}>

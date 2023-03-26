@@ -105,7 +105,6 @@ const Tetris = () => {
 			if (player.pos.y < 1) {
 				setGameState("over");
 				setGameStatus({ ...gameStatus, dropTime: null });
-				console.log("gameover");
 			} else {
 				const { newStage, rowCount } = mergeAndSweepStage(stage, player);
 				const totalRows = gameStatus.rows + rowCount;

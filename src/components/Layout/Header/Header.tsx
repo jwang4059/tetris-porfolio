@@ -12,9 +12,7 @@ const Header = (props: Props) => {
 
 	return (
 		<header className={styles["header"]}>
-			<div className={styles["logo"]}>
-				<Image src={""} alt={""} />
-			</div>
+			<div className={styles["logo"]}>{/* <Image src={""} alt={""} /> */}</div>
 			<NavToggle isOpen={isOpen} onClick={() => setIsOpen(!isOpen)} />
 			<nav
 				className={clsx({
