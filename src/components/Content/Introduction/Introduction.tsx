@@ -16,7 +16,7 @@ const Introduction = () => {
 					src={profilePic}
 					alt="Picture of the author"
 					fill
-					sizes="(max-width: 600px) 100vw, 33vw"
+					sizes="(max-width: 600px) 90vw, 33vw"
 					priority
 				/>
 			</div>
