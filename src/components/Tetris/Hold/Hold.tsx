@@ -18,7 +18,7 @@ const Hold = ({ tetrominoType, hasSwitch }: HoldProps) => {
 		<div className={styles["hold"]}>
 			<div className={styles["hold__title"]}>Hold</div>
 			<div className={styles["hold__board__wrapper"]}>
-				<Board matrix={hold} locked={!hasSwitch} trimmed />
+				<Board matrix={hold} locked={!hasSwitch} shape="trimmed" />
 			</div>
 		</div>
 	);

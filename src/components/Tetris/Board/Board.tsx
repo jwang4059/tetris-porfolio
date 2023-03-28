@@ -5,12 +5,12 @@ import styles from "./Board.module.scss";
 interface BoardProps {
 	matrix?: string[][];
 	locked?: boolean;
-	trimmed?: boolean;
+	shape: string;
 }
 
-const Board = ({ matrix, locked, trimmed }: BoardProps) => {
+const Board = ({ matrix, locked, shape }: BoardProps) => {
 	return (
-		<div className={trimmed ? styles.trimmed : styles.default}>
+		<div className={styles[shape]}>
 			{matrix &&
 				matrix.map((row) =>
 					row.map((cell, x) => <Cell key={x} type={cell} locked={locked} />)

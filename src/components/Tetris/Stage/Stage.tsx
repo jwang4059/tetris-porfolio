@@ -10,7 +10,7 @@ interface StageProps {
 const Stage = ({ stage }: StageProps) => {
 	return (
 		<div className={styles.stage}>
-			<Board matrix={stage} />
+			<Board matrix={stage} shape="default" />
 		</div>
 	);
 };

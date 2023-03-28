@@ -1,9 +1,32 @@
 import React from "react";
+import Board from "@/components/Tetris/Board/Board";
 import styles from "./About.module.scss";
 
 const About = () => {
 	return (
 		<section className={styles["about"]} id="about">
+			<div className={styles["about__tetris__wrapper"]}>
+				<div className={styles["about__tetris"]}>
+					<Board
+						matrix={[
+							["J", "J", "", ""],
+							["J", "", "", ""],
+							["J", "", "", ""],
+							["", "", "", ""],
+						]}
+						shape="square"
+					/>
+					<Board
+						matrix={[
+							["", "", "L", "L"],
+							["", "", "", "L"],
+							["", "", "", "L"],
+							["", "", "", ""],
+						]}
+						shape="square"
+					/>
+				</div>
+			</div>
 			<h1 className={styles["about__title"]}>Who I am</h1>
 			<div className={styles["about__body"]}>
 				<p>
@@ -16,6 +39,28 @@ const About = () => {
 			<a className={styles["about__button"]} href="#experience">
 				My Work
 			</a>
+			<div className={styles["about__tetris__wrapper"]}>
+				<div className={styles["about__tetris"]}>
+					<Board
+						matrix={[
+							["", "", "", ""],
+							["L", "", "", ""],
+							["L", "", "", ""],
+							["L", "L", "", ""],
+						]}
+						shape="square"
+					/>
+					<Board
+						matrix={[
+							["", "", "", ""],
+							["", "", "", "J"],
+							["", "", "", "J"],
+							["", "", "J", "J"],
+						]}
+						shape="square"
+					/>
+				</div>
+			</div>
 		</section>
 	);
 };

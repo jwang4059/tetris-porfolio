@@ -4,6 +4,25 @@
 	text-align: center;
 }
 
+@media (max-width: 600px) {
+	.about {
+		padding: 2em 1em;
+	}
+}
+
+.about__tetris__wrapper {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.about__tetris {
+	width: 750px;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
 .about__title {
 	color: var(--clr-accent);
 	position: relative;

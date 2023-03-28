@@ -18,6 +18,10 @@ $trimmed-size: 12px;
 	background-color: #262626;
 }
 
+.square {
+	@include board(4, 4, 1em);
+}
+
 .trimmed {
-	@include board($trimmed-height, $trimmed-width, $trimmed-size);
+	@include board(2, 4, 12px);
 }

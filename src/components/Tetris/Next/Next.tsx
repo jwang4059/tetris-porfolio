@@ -21,7 +21,7 @@ const Next = ({ queue }: NextProps) => {
 			<div className={styles["next__boards__wrapper"]}>
 				{boardList.map((board, i) => (
 					<div key={i} className={styles["next__board__wrapper"]}>
-						<Board matrix={board} trimmed />
+						<Board matrix={board} shape="trimmed" />
 					</div>
 				))}
 			</div>
