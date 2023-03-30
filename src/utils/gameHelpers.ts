@@ -15,6 +15,28 @@ export const getDropTime = (currLevel: number) => {
 	return 1000 / currLevel + 200;
 };
 
+export const getBoardStyle = (
+	row: number,
+	col: number,
+	size: string,
+	grid?: boolean
+) => {
+	const gridStyles = grid
+		? {
+				gap: "1px",
+				border: "1px solid #262626",
+				backgroundColor: "#262626",
+		  }
+		: {};
+
+	return {
+		display: "grid",
+		gridTemplateColumns: `repeat(${col}, ${size})`,
+		gridTemplateRows: `repeat(${row}, ${size})`,
+		...gridStyles,
+	};
+};
+
 export const createMatrix = (height: number, width: number) => {
 	return new Array(height).fill(new Array(width).fill("0")) as string[][];
 };

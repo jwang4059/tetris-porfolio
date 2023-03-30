@@ -9,21 +9,23 @@ const About = () => {
 				<div className={styles["about__tetris"]}>
 					<Board
 						matrix={[
-							["J", "J", "", ""],
-							["J", "", "", ""],
-							["J", "", "", ""],
-							["", "", "", ""],
+							["J", "J"],
+							["J", ""],
+							["J", ""],
 						]}
-						shape="square"
+						row={3}
+						col={2}
+						size={"1em"}
 					/>
 					<Board
 						matrix={[
-							["", "", "L", "L"],
-							["", "", "", "L"],
-							["", "", "", "L"],
-							["", "", "", ""],
+							["L", "L"],
+							["", "L"],
+							["", "L"],
 						]}
-						shape="square"
+						row={3}
+						col={2}
+						size={"1em"}
 					/>
 				</div>
 			</div>
@@ -43,21 +45,23 @@ const About = () => {
 				<div className={styles["about__tetris"]}>
 					<Board
 						matrix={[
-							["", "", "", ""],
-							["L", "", "", ""],
-							["L", "", "", ""],
-							["L", "L", "", ""],
+							["L", ""],
+							["L", ""],
+							["L", "L"],
 						]}
-						shape="square"
+						row={3}
+						col={2}
+						size={"1em"}
 					/>
 					<Board
 						matrix={[
-							["", "", "", ""],
-							["", "", "", "J"],
-							["", "", "", "J"],
-							["", "", "J", "J"],
+							["", "J"],
+							["", "J"],
+							["J", "J"],
 						]}
-						shape="square"
+						row={3}
+						col={2}
+						size={"1em"}
 					/>
 				</div>
 			</div>
