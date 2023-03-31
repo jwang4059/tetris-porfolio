@@ -5,6 +5,7 @@ import Introduction from "@/components/Content/Introduction/Introduction";
 import About from "@/components/Content/About/About";
 import Experience from "@/components/Content/Experience/Experience";
 import Projects from "@/components/Content/Projects/Projects";
+import Scrollbar from "@/components/Content/Scrollbar/Scrollbar";
 
 export default function Home() {
 	return (
@@ -31,6 +32,7 @@ export default function Home() {
 				<meta property="og:url" content="johnwang.vercel.app" />
 				<link rel="icon" href="/favicon.ico" />
 			</Head>
+			<Scrollbar />
 			<Header />
 			<main>
 				<Introduction />
