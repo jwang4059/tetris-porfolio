@@ -3,26 +3,29 @@ import Board from "@/components/Tetris/Board/Board";
 import styles from "./Scrollbar.module.scss";
 import { usePageOffset } from "@/hooks";
 
-type Props = {};
-
-const Scrollbar = (props: Props) => {
+const Scrollbar = () => {
 	const scrollY = usePageOffset();
-	const [maxScrollY, setMaxScrollY] = useState(0);
+	const [scrollProps, setScrollProps] = useState<{
+		maxScrollY: number;
+		scrollHeight: number;
+	}>({ maxScrollY: 0, scrollHeight: 0 });
 
 	useEffect(() => {
-		setMaxScrollY(
-			document.documentElement.scrollHeight -
-				document.documentElement.clientHeight
-		);
+		setScrollProps({
+			maxScrollY:
+				document.body.scrollHeight - document.documentElement.clientHeight,
+			scrollHeight: document.body.scrollHeight,
+		});
 	}, []);
 
 	const getPagePosition = () => {
-		return Math.floor(scrollY / maxScrollY) * 100;
+		const { maxScrollY, scrollHeight } = scrollProps;
+		return Math.round((scrollY / maxScrollY) * scrollHeight);
 	};
 
 	return (
 		<div
-			style={{ top: `${getPagePosition()}%` }}
+			style={{ top: `calc(${getPagePosition()}px - 4em)` }}
 			className={styles["scrollbar"]}
 		>
 			<Board
