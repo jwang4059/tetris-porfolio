@@ -32,7 +32,6 @@ export default function Home() {
 				<meta property="og:url" content="johnwang.vercel.app" />
 				<link rel="icon" href="/favicon.ico" />
 			</Head>
-			<Scrollbar />
 			<Header />
 			<main>
 				<Introduction />
@@ -41,6 +40,7 @@ export default function Home() {
 				<Projects />
 			</main>
 			<Footer />
+			{/* <Scrollbar /> */}
 		</>
 	);
 }

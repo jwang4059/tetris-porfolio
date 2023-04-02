@@ -4,35 +4,29 @@ import styles from "./Scrollbar.module.scss";
 import { usePageOffset } from "@/hooks";
 
 const Scrollbar = () => {
-	const scrollY = usePageOffset();
-	const [scrollProps, setScrollProps] = useState<{
-		maxScrollY: number;
-		scrollHeight: number;
-	}>({ maxScrollY: 0, scrollHeight: 0 });
-
-	useEffect(() => {
-		setScrollProps({
-			maxScrollY:
-				document.body.scrollHeight - document.documentElement.clientHeight,
-			scrollHeight: document.body.scrollHeight,
-		});
-	}, []);
+	const scrollProps = usePageOffset();
 
 	const getPagePosition = () => {
-		const { maxScrollY, scrollHeight } = scrollProps;
-		return Math.round((scrollY / maxScrollY) * scrollHeight);
+		const { scrollY, maxScrollY, scrollHeight } = scrollProps;
+		const currentScrollHeight = Math.round(
+			(scrollY / maxScrollY) * scrollHeight
+		);
+
+		console.log({ currentScrollHeight, scrollHeight });
+
+		return Math.min(currentScrollHeight, scrollHeight);
 	};
 
 	return (
 		<div
-			style={{ top: `calc(${getPagePosition()}px - 4em)` }}
+			style={{ top: `calc(${getPagePosition()}px - 16vw)` }}
 			className={styles["scrollbar"]}
 		>
 			<Board
 				matrix={[["I"], ["I"], ["I"], ["I"]]}
 				row={4}
 				col={1}
-				size={"1em"}
+				size={"4vw"}
 			/>
 		</div>
 	);
