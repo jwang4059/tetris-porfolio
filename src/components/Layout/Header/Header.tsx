@@ -1,18 +1,159 @@
 import React, { useState } from "react";
-import Image from "next/image";
 import clsx from "clsx";
-import NavToggle from "./Nav/NavToggle/NavToggle";
+import NavToggle from "./NavToggle/NavToggle";
+import Board from "@/components/Tetris/Board/Board";
 import { resume } from "@/utils/data";
 import styles from "./Header.module.scss";
 
-type Props = {};
-
-const Header = (props: Props) => {
+const Header = () => {
 	const [isOpen, setIsOpen] = useState(false);
 
 	return (
 		<header className={styles["header"]}>
-			<div className={styles["logo"]}>{/* <Image src={""} alt={""} /> */}</div>
+			<a href=".">
+				<Board
+					matrix={[
+						[
+							"",
+							"",
+							"",
+							"a",
+							"",
+							"a",
+							"",
+							"",
+							"",
+							"a",
+							"",
+							"",
+							"a",
+							"a",
+							"",
+							"",
+							"a",
+							"",
+							"",
+							"a",
+							"",
+							"",
+							"a",
+							"a",
+							"a",
+						],
+						[
+							"",
+							"",
+							"",
+							"a",
+							"",
+							"a",
+							"",
+							"",
+							"",
+							"a",
+							"",
+							"a",
+							"",
+							"",
+							"a",
+							"",
+							"a",
+							"a",
+							"",
+							"a",
+							"",
+							"a",
+							"",
+							"",
+							"",
+						],
+						[
+							"a",
+							"",
+							"",
+							"a",
+							"",
+							"a",
+							"",
+							"",
+							"",
+							"a",
+							"",
+							"a",
+							"a",
+							"a",
+							"a",
+							"",
+							"a",
+							"",
+							"a",
+							"a",
+							"",
+							"a",
+							"",
+							"a",
+							"a",
+						],
+						[
+							"a",
+							"",
+							"",
+							"a",
+							"",
+							"a",
+							"",
+							"a",
+							"",
+							"a",
+							"",
+							"a",
+							"",
+							"",
+							"a",
+							"",
+							"a",
+							"",
+							"",
+							"a",
+							"",
+							"a",
+							"",
+							"",
+							"a",
+						],
+						[
+							"",
+							"a",
+							"a",
+							"",
+							"",
+							"",
+							"a",
+							"",
+							"a",
+							"",
+							"",
+							"a",
+							"",
+							"",
+							"a",
+							"",
+							"a",
+							"",
+							"",
+							"a",
+							"",
+							"",
+							"a",
+							"a",
+							"a",
+						],
+					]}
+					row={5}
+					col={25}
+					size={"0.25em"}
+				/>
+			</a>
 			<NavToggle isOpen={isOpen} onClick={() => setIsOpen(!isOpen)} />
 			<nav
 				className={clsx({

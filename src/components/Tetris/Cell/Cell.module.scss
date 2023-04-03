@@ -7,9 +7,9 @@ $tetris-purple: #aa00ff;
 $tetris-red: #ff0000;
 $tetris-gray: #808080;
 
-@mixin empty($color: transparent) {
+@mixin empty($color: transparent, $bgColor: black) {
 	width: auto;
-	background-color: black;
+	background-color: $bgColor;
 	border: 1px solid $color;
 }
 
@@ -53,6 +53,10 @@ $tetris-gray: #808080;
 
 .z {
 	@include empty($color: $tetris-red);
+}
+
+.a {
+	@include empty($color: var(--clr-accent), $bgColor: transparent);
 }
 
 .Locked {
