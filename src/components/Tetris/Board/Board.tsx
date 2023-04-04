@@ -12,13 +12,14 @@ interface BoardProps {
 }
 
 const Board = ({ matrix, locked, row, col, size, grid }: BoardProps) => {
-	return matrix ? (
+	return (
 		<div style={getBoardStyle(row, col, size, grid)}>
-			{matrix.map((row) =>
-				row.map((cell, x) => <Cell key={x} type={cell} locked={locked} />)
-			)}
+			{matrix &&
+				matrix.map((row) =>
+					row.map((cell, x) => <Cell key={x} type={cell} locked={locked} />)
+				)}
 		</div>
-	) : null;
+	);
 };
 
 export default Board;
