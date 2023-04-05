@@ -1,6 +1,6 @@
 import React from "react";
 import Board from "../Board/Board";
-import { createMatrix, mergeMatrix } from "@/utils/gameHelpers";
+import { createMatrix } from "@/utils/gameHelpers";
 import { TETROMINOS_TRIMMED } from "@/utils/tetrominos";
 import styles from "./Hold.module.scss";
 
