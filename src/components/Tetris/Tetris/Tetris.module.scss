@@ -8,12 +8,30 @@
 
 .tetris {
 	background-color: var(--clr-accent);
+	font-family: var(--ff-secondary);
+	text-align: center;
+	position: relative;
+}
+
+.tetris__toggle__wrapper {
+	display: flex;
+	justify-content: flex-end;
+}
+
+.tetris__toggle {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	padding: 1rem;
+	cursor: pointer;
+}
+
+.tetris__grid {
 	display: grid;
 	grid-template-columns: 1fr auto 1fr;
-	grid-template-areas: "hold stage next" "info1 stage info2" ". info3 .";
+	grid-template-areas: "hold stage next" "info1 stage info2";
 	column-gap: 1rem;
 	padding: 1rem;
-	font-family: var(--ff-secondary);
 }
 
 .hold {
@@ -40,9 +58,4 @@
 	grid-area: info2;
 	align-self: flex-end;
 	text-align: left;
-}
-
-.info3 {
-	grid-area: info3;
-	text-align: center;
 }

@@ -1,11 +1,13 @@
 import _ from "lodash";
 import React, { useState, useEffect } from "react";
+import { BsGearFill } from "react-icons/bs";
 import { useInterval, usePlayer } from "@/hooks/index";
 import Display from "../Display/Display";
 import Stage from "../Stage/Stage";
 import Hold from "../Hold/Hold";
 import Next from "../Next/Next";
 import StartButton from "../StartButton/StartButton";
+import Keys from "../Keys/Keys";
 import {
 	checkCollision,
 	getHardDropPos,
@@ -35,6 +37,7 @@ const Tetris = () => {
 	const [stageView, setStageView] = useState<StageType | undefined>(stage);
 	const [player, updatePlayerPos, resetPlayer, playerRotate, playerHold] =
 		usePlayer();
+	const [keysOpen, setKeysOpen] = useState<boolean>(false);
 
 	useInterval(
 		() => {
@@ -86,6 +89,7 @@ const Tetris = () => {
 			handlePause();
 		} else {
 			setGameState("playing");
+			setTime(0);
 			setGameStatus({ score: 0, rows: 0, level: 1, dropTime: 1000 });
 			setStage(createMatrix(STAGE_HEIGHT, STAGE_WIDTH));
 			resetPlayer(true);
@@ -134,7 +138,7 @@ const Tetris = () => {
 		e.preventDefault();
 
 		const { key } = e;
-		if (gameState === "playing" || key === "p") {
+		if (gameState === "playing" || (!keysOpen && key === "p")) {
 			switch (key) {
 				case "ArrowLeft":
 					movePlayer(-1);
@@ -159,7 +163,8 @@ const Tetris = () => {
 					hardDropPlayer();
 					break;
 				case "p":
-					handlePause();
+					if (gameState === "initial") handleStart();
+					else handlePause();
 					break;
 			}
 		}
@@ -168,46 +173,59 @@ const Tetris = () => {
 	return (
 		<div className={styles.wrapper}>
 			<div
-				className={styles.tetris}
+				className={styles["tetris"]}
 				tabIndex={0}
 				onKeyDown={(e) => handleKeyPress(e)}
 			>
-				<div className={styles["hold"]}>
-					<Hold tetrominoType={player.hold} hasSwitch={player.hasSwitch} />
+				<div className={styles["tetris__toggle__wrapper"]}>
+					<span
+						className={styles["tetris__toggle"]}
+						onClick={() => {
+							if (gameState === "playing") handlePause();
+							setKeysOpen(true);
+						}}
+					>
+						<BsGearFill />
+					</span>
 				</div>
-				<div className={styles["info1"]}>
-					<Display
-						text="Speed Level"
-						value={gameStatus.level}
-						gameOver={gameState === "over"}
-					/>
-					<Display
-						text="Lines"
-						value={gameStatus.rows}
-						gameOver={gameState === "over"}
-					/>
+				<h3>Tetris</h3>
+				<div className={styles["tetris__grid"]}>
+					<div className={styles["hold"]}>
+						<Hold tetrominoType={player.hold} hasSwitch={player.hasSwitch} />
+					</div>
+					<div className={styles["info1"]}>
+						<Display
+							text="Speed Level"
+							value={gameStatus.level}
+							gameOver={gameState === "over"}
+						/>
+						<Display
+							text="Lines"
+							value={gameStatus.rows}
+							gameOver={gameState === "over"}
+						/>
+					</div>
+					<div className={styles["stage"]}>
+						<Stage stage={stageView} />
+					</div>
+					<div className={styles["next"]}>
+						<Next queue={player.queue} />
+					</div>
+					<div className={styles["info2"]}>
+						<Display
+							text="Time"
+							value={getTimeStr(time)}
+							gameOver={gameState === "over"}
+						/>
+						<Display
+							text="Score"
+							value={gameStatus.score}
+							gameOver={gameState === "over"}
+						/>
+					</div>
 				</div>
-				<div className={styles["stage"]}>
-					<Stage stage={stageView} />
-				</div>
-				<div className={styles["next"]}>
-					<Next queue={player.queue} />
-				</div>
-				<div className={styles["info2"]}>
-					<Display
-						text="Time"
-						value={getTimeStr(time)}
-						gameOver={gameState === "over"}
-					/>
-					<Display
-						text="Score"
-						value={gameStatus.score}
-						gameOver={gameState === "over"}
-					/>
-				</div>
-				<div className={styles["info3"]}>
-					<StartButton gameState={gameState} onClick={handleStart} />
-				</div>
+				<StartButton gameState={gameState} onClick={handleStart} />
+				{keysOpen && <Keys close={() => setKeysOpen(false)} />}
 			</div>
 		</div>
 	);
