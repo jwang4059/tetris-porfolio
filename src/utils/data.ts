@@ -183,7 +183,7 @@ export const projectsData: ProjectType[] = [
 			src: ckiPIc,
 			alt: "UCI Circle K Image",
 		},
-		title: "ucicirclek.xyz",
+		title: "UCICKI Club Website",
 		subtitle: "Full Stack Web Application",
 		description: `This is my clone of the UCI Circle K website. I am currently working on refactoring the original LAMP stack website with modern web development technologies. My goal is to improve overall SEO, performance, and responsiveness of the original website.`,
 		stack: [
