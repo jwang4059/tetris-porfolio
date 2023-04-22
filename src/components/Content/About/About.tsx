@@ -32,10 +32,10 @@ const About = () => {
 			<h1 className={styles["about__title"]}>Who I am</h1>
 			<div className={styles["about__body"]}>
 				<p>
-					{`Hi. I'm John, a full stack engineer based in the Bay Area. I specialize in making full stack web applications with React.js , Node.js, and Express.js. When it comes to coding, I'm passionate about working on meaningful projects that can be of use to people. I enjoy building fully, responsive applications that are user friendly and optimized with clean, resusable code.`}
+					{`Hey there, I'm John - a full stack engineer based in the Bay Area. I love building web applications with React.js, Node.js, and Express.js. Making meaningful projects that can help people is what gets me up in the morning! My goal is to create fully responsive, user-friendly applications with clean and reusable code.`}
 				</p>
 				<p>
-					{`In my free time, I like working on myself and pushing myself to being the best that I can be. This includes working out, learning new skills, and working on personal projects. Current goals include running a marathon and learning React Native. Besides that, I enjoy going out and spending time with family and friends.`}
+					{`In my free time, I like to challenge myself to be the best I can be. That means hitting the gym, learning new skills, and tinkering with personal projects. Right now, I'm training for the SF marathon and teaching myself Kotlin to build cool apps on Android.`}
 				</p>
 			</div>
 			<a className={styles["about__button"]} href="#experience">

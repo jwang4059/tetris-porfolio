@@ -36,57 +36,53 @@ const Project = ({ data }: { data: ProjectType }) => {
 				/>
 			</div>
 			<div className={styles["project__info"]}>
-				<h3 className={styles["project__title"]}>{data.title}</h3>
-				<p className={styles["project__subtitle"]}>{data.subtitle}</p>
-				<div className={styles["project__repo__wrapper"]}>
-					<a
-						className={styles["project__repo"]}
-						href={data.repo}
-						target="_blank"
-						rel="noreferrer"
-						role="button"
-					>
-						<SiGithub /> Github
-					</a>
-				</div>
-				<p className={styles["project__description"]}>{data.description}</p>
-				{data.stack && (
-					<div className={styles["project__stack"]}>
-						<button
-							className={styles["project__stack__navigation__arrow"]}
-							aria-label="Scroll Left"
-							onClick={() => scroll(-25)}
+				<div className={styles["project__info__header"]}>
+					<h3 className={styles["project__title"]}>{data.title}</h3>
+					<p className={styles["project__subtitle"]}>{data.subtitle}</p>
+					<div className={styles["project__repo__wrapper"]}>
+						<a
+							className={styles["project__repo"]}
+							href={data.repo}
+							target="_blank"
+							rel="noreferrer"
+							role="button"
 						>
-							<MdChevronLeft />
-						</button>
-						<ul ref={iconListRef} className={styles["project__icons__list"]}>
-							{data.stack.map((x) => (
-								<StackIcon
-									key={x}
-									name={iconMap[x].name}
-									Icon={iconMap[x].icon}
-								/>
-							))}
-						</ul>
-						<button
-							className={styles["project__stack__navigation__arrow"]}
-							aria-label="Scroll Right"
-							onClick={() => scroll(25)}
-						>
-							<MdChevronRight />
-						</button>
+							<SiGithub /> Github
+						</a>
 					</div>
-				)}
-				{data.url && (
-					<a
-						className={styles["project__link"]}
-						href={data.url}
-						target="_blank"
-						rel="noreferrer"
-					>
-						See Live
-					</a>
-				)}
+				</div>
+				<div className={styles["project__info__body"]}>
+					<p className={styles["project__description"]}>{data.description}</p>
+				</div>
+				<div className={styles["project__info__footer"]}>
+					{data.stack && (
+						<div className={styles["project__stack"]}>
+							<button
+								className={styles["project__stack__navigation__arrow"]}
+								aria-label="Scroll Left"
+								onClick={() => scroll(-25)}
+							>
+								<MdChevronLeft />
+							</button>
+							<ul ref={iconListRef} className={styles["project__icons__list"]}>
+								{data.stack.map((x) => (
+									<StackIcon
+										key={x}
+										name={iconMap[x].name}
+										Icon={iconMap[x].icon}
+									/>
+								))}
+							</ul>
+							<button
+								className={styles["project__stack__navigation__arrow"]}
+								aria-label="Scroll Right"
+								onClick={() => scroll(25)}
+							>
+								<MdChevronRight />
+							</button>
+						</div>
+					)}
+				</div>
 			</div>
 		</section>
 	);
